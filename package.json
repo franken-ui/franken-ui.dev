@@ -10,8 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.13.1",
-    "@astrojs/check": "^0.9.1",
+    "@astrojs/check": "^0.9.4",
+    "@tailwindcss/vite": "^4.0.15",
+    "astro": "^5.7.4",
+    "franken-ui": "^2.1.0-next.4",
+    "postcss": "^8.4.40",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.5",
+    "tailwindcss": "^4.0.15",
     "typescript": "^5.5.4"
   }
 }
