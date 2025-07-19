@@ -1,0 +1,82 @@
+---
+group: components
+text: List
+title: List
+lead: Easily create nice looking lists, which come in different styles.
+meta:
+  description: Easily create nice looking lists, which come in different styles.
+---
+import Ec from 'snippets/ec.astro';
+
+
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+To apply this component, add the `.uk-list` class to an unordered or ordered list. The list will now display without any spacing or list-style.
+
+<Ec path="list.1" />
+
+<Snippet component="list.basic" />
+
+## Style type modifiers
+
+Add one of the following classes to set the marker of a list item.
+
+| Class              | Description                                      |
+| ------------------ | ------------------------------------------------ |
+| `.uk-list-disc`    | Use a filled circle as a marker.                 |
+| `.uk-list-circle`  | Use a hollow circle as marker.                   |
+| `.uk-list-square`  | Use a filled square as marker                    |
+| `.uk-list-decimal` | Use decimal numbers as marker. Beginning with 1. |
+| `.uk-list-hyphen`  | Use a hyphen as marker                           |
+
+<Ec path="list.2" />
+
+<Snippet component="list.style" />
+
+## Color modifiers
+
+Add one of the following classes to set the marker color.
+
+| Class                | Description                                                      |
+| -------------------- | ---------------------------------------------------------------- |
+| `.uk-list-muted`     | Add this class to mute the marker.                               |
+| `.uk-list-primary`   | Add this class to emphasize the marker with the primary color.   |
+| `.uk-list-secondary` | Add this class to emphasize the marker with the secondary color. |
+
+<Ec path="list.3" />
+
+<Snippet component="list.color" />
+
+## Image bullet modifier
+
+Add the `.uk-list-bullet` class to set a custom image bullet as a marker of a list item. Mind, that it can not be combined with color modifiers.
+
+<Ec path="list.4" />
+
+<Snippet component="list.image_bullet" />
+
+## Divider modifier
+
+Add the `.uk-list-divider` class to separate list items with lines.
+
+<Ec path="list.5" />
+
+<Snippet component="list.divider" />
+
+## Striped modifier
+
+Add zebra-striping to a list using the `.uk-list-striped` class.
+
+<Ec path="list.6" />
+
+<Snippet component="list.striped" />
+
+## Accessibility
+
+Set the appropriate WAI-ARIA roles, states and properties to the List component.
+
+- If a `<div>` element is used, set the `list` role to the list, and the `listitem` role to the list items.
+
+<Ec path="list.7" />

@@ -1,0 +1,56 @@
+---
+import { readSnippetDirectories } from "data/snippets_pages";
+import fs from "fs";
+import path from "path";
+import { Code } from "astro-expressive-code/components";
+
+export const partial = true;
+export async function getStaticPaths() {
+  const snippets = readSnippetDirectories();
+  const paths = [];
+
+  for (const snippet of snippets) {
+    const { category, slug } = snippet;
+
+    // Get the full path to the snippet directory
+    const snippetDir = path.join(
+      process.cwd(),
+      "src/snippets_pages/2.1",
+      category,
+      slug,
+    );
+
+    // Get all files in the directory
+    const files = fs.readdirSync(snippetDir);
+
+    // Create a path for each file
+    for (const file of files) {
+      // Skip directories, only process files
+      const filePath = path.join(snippetDir, file);
+      if (!fs.statSync(filePath).isFile()) continue;
+
+      // Read the content of the file
+      const content = fs.readFileSync(filePath, "utf-8");
+
+      paths.push({
+        params: {
+          category,
+          slug,
+          id: file.replace(/\.[^/.]+$/, ""),
+        },
+        props: {
+          content,
+          type: path.extname(file).substring(1),
+        },
+      });
+    }
+  }
+
+  return paths;
+}
+
+// const { category, slug, id } = Astro.params;
+const { content, type } = Astro.props;
+---
+
+<Code code={content} lang={type} />

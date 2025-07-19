@@ -1,0 +1,10 @@
+{
+  "category": "authentication",
+  "id": "login-04",
+  "text": "login-04",
+  "title": "Login",
+  "description": "An email-only, two column login page with a testimonial section.",
+  "frame": {
+    "height": 770
+  }
+}

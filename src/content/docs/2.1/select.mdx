@@ -1,0 +1,194 @@
+---
+group: forms
+text: Select
+title: Select
+lead: Displays a list of options for the user to pick from—triggered by a button.
+meta:
+  description: Displays a list of options for the user to pick from—triggered by a button.
+keywords: "form,combobox"
+webc: true
+---
+
+import Ec from "snippets/ec.astro";
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+The custom select component is a web component built from scratch to enhance the native `<select>` tag. To get started, simply use the `<uk-select>` markup in your HTML code with one `<select hidden></select>` tag as options reference.
+
+<Snippet component="select.basic" />
+
+## Styling
+
+The `<uk-select>` component is intentionally unstyled by default, allowing you to easily customize its appearance to fit your needs.
+
+To add custom styles, use the `cls-custom` attribute. This attribute accepts two formats:
+
+- A JSON-stringified object
+- A valid `key: value; foo: bar;` format
+
+If you pass only class names, they will be applied directly to the button inside the component.
+
+<Snippet component="select.styling" />
+
+## Capturing values
+
+There are several ways to capture values from the `<uk-select>` component. The simplest approach is to add a `name` attribute to the component. When you do this, a hidden input field with the specified name will be automatically generated, allowing you to easily capture the selected value on your server.
+
+<Snippet component="select.capturing_values" />
+
+<span class="uk-label uk-label-primary">Note</span> If you don't specify a `value` attribute for an `<option>` tag, it will default to using its text content as the value instead.
+
+## Parent icon
+
+To add a parent icon, just add an `icon` attribute to the `<uk-select>` component. If you want to customize the icon, just pass a string name of the icon.
+
+<Snippet component="select.parent_icon" />
+
+## Options icon
+
+To add icon to options, just add `data-icon` attribute with the name of the icon to your `<option>` tags.
+
+<Snippet component="select.options_icon" />
+
+## Position
+
+Because the `<uk-select>` component uses the [Drop](/docs/2.1/drop) component under the hood, we can leverage its positioning capabilities and position our dropdown anywhere we want. To position it, just use the `drop` attribute with your drop options.
+
+<Snippet component="select.position" />
+
+## Size modifiers
+
+There are several size modifiers available. Just add one of the following classes to make the fake input smaller or larger.
+
+| Class         | Description               |
+| ------------- | ------------------------- |
+| `.uk-form-xs` | Applies extra small size. |
+| `.uk-form-sm` | Applies small size.       |
+| `.uk-form-md` | Applies medium size.      |
+| `.uk-form-lg` | Applies large size.       |
+
+<Snippet component="select.size" />
+
+## Adding header
+
+To add a header to your custom select component, use the `<optgroup>` tag, which will be automatically converted into a dropdown header, providing a seamless developer experience.
+
+<Snippet component="select.adding_header" />
+
+## Selecting multiple values
+
+To enable the selection of multiple values, simply add the `multiple` attribute to the `<uk-select>` element. This will allow users to choose multiple options from the dropdown list.
+
+<Snippet component="select.multiple" />
+
+<span class="uk-label uk-label-primary">Note</span> When utilizing the
+`multiple` attribute, note that it will automatically append `[]` to the name of
+your input. This is particularly useful when your server expects multiple
+values, even if the user selects only one option. This ensures that your
+server-side logic can properly handle the input, regardless of the number of
+values selected.
+
+## Prepopulating values
+
+There are two ways to prepopulate values from the `<uk-select>` component. The simplest approach is to add a `selected` attribute to one or more of your `<option>` tags.
+
+<Snippet component="select.prepopulated" />
+
+### Manually setting value
+
+Alternatively, if setting `selected` on individual `<option>` elements is not feasible, you can use the `value` attribute on the `<uk-select>` tag to prepopulate it with default values. This attribute accepts a comma-separated list of values, allowing you to set multiple defaults, such as `value="Mercedes-Benz,Bentley,Porsche,Lamborghini"`.
+
+<Snippet component="select.prepopulated_1" />
+
+<span class="uk-label uk-label-primary">Note</span> When both `value` and
+`selected` are used, the `value` attribute takes precedence. Therefore, it's
+recommended to use one method or the other to avoid conflicts.{" "}
+
+## Disabling options
+
+Similar to the native `<select>` tag, you can disable specific options in the custom select component by adding the `disabled` attribute to one or more of your `<option>` or `<optgroup>` tags. This allows you to prevent users from selecting certain options.
+
+<Snippet component="select.disabling_options" />
+
+## Reactivity
+
+<span class="uk-label uk-label-destructive">Experimental</span> By default, the `<uk-select>` component is not reactive. This is a deliberate design choice, as using [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) can be computationally expensive. As a result, changes to the referenced `<select hidden>` element will not trigger an update.
+
+To enable reactivity, simply add the `reactive` attribute to the `<uk-select>` component. This will use [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) under the hood to monitor the `<select hidden>` element for changes.
+
+This feature is particularly useful when using libraries like HTMX, where you may need to dynamically update the options in the `<select hidden>` element based on user interactions, such as searching for data or fetching new options from the server.
+
+<Ec path="select.1" />
+
+## Searchable
+
+To add a search box, simply add the `searchable` attribute. This will add an input field within the dropdown menu, enabling users to search for specific options. This feature is particularly useful when dealing with extensive lists, such as selecting a country from a long list of options.
+
+<Snippet component="select.searchable" />
+
+### Custom keywords
+
+Sometimes, there are items that have related keywords that may be slightly off or awkward when included as anchor tags. For these use cases, we can leverage the `data-keywords` attribute.
+
+For example, if we have a "Form" link but also want it to appear when users search for terms like "checkbox," "input," "toggle switch," etc., we can simply add a comma-separated list of terms like this: `data-keywords="apple, mango, lemon"`.
+
+<Snippet component="select.custom_keywords" />
+
+## Disable input
+
+To prevent user input, add the `disabled` attribute to the `<uk-select>` element. This will disable the custom select, making it impossible for users to enter or modify its value.
+
+<Snippet component="select.disabled" />
+
+## Error state
+
+To indicate an error state in the form, simply add the `.uk-form-destructive` class to the `cls-custom` attribute. This will apply a "destructive" state to the component, providing visual feedback to the user.
+
+<Snippet component="select.error" />
+
+## Preventing layout shift
+
+When loading Web Components, a brief delay may cause a flash of unstyled content. To mitigate this issue, consider setting a predefined height on the parent element to prevent layout shift and ensure a smooth user experience.
+
+<Ec path="select.2" />
+
+## Internationalization
+
+<Snippet component="select.i18n" />
+
+## Available options
+
+| Name                 | Description                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `selection-count`    | Displays a customizable message, e.g. ":n: つのオプションが選択されました", where :n: is the number of selected options. |
+| `search-placeholder` | The placeholder for the search box.                                                                                      |
+
+## Attributes
+
+The following attributes are available for this component:
+
+| Name                     | Type    | Default | Description                                                                                                                                                        |
+| ------------------------ | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `insertable`             | Boolean | false   | Allows users to add new options that aren't in the original list.                                                                                                  |
+| `force-prevent-rerender` | Boolean | false   | Forcefully prevents component rerendering.                                                                                                                         |
+| `name`                   | String  |         | Specifies the name of the input field.                                                                                                                             |
+| `multiple`               | Boolean | false   | Determines whether the component accepts multiple values or not.                                                                                                   |
+| `disabled`               | Boolean | false   | Enables or disables the entire component.                                                                                                                          |
+| `placeholder`            | String  |         | Sets the placeholder text for the component.                                                                                                                       |
+| `searchable`             | Boolean | false   | Adds a search input field within the dropdown menu, allowing users to search for specific options.                                                                 |
+| `cls-custom`             | String  |         | Allows you to add custom CSS classes.                                                                                                                              |
+| `i18n`                   | String  |         | Enables internationalization. Please see [Internationalization](#internationalization) for available options.                                                      |
+| `reactive`               | Boolean | false   | Enables reactivity by using `MutationObserver` to monitor the referenced `<select hidden>` element for changes, triggering updates to the `<uk-select>` component. |
+| `value`                  | String  |         | A comma-separated list of values that will be prepopulated in the input field.                                                                                     |
+| `icon`                   | String  |         | Sets a customized icon. If no icon is passed, it will default to a chevron down icon.                                                                              |
+| `drop`                   | String  |         | Customize the dropping option for the dropdown. See [Drop](/docs/2.1/drop) component for more options.                                                             |
+
+## Events
+
+The custom select component triggers the following events on elements with this component attached:
+
+| Name               | Description                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------- |
+| `uk-select:input`  | Fired after the value has changed, providing an opportunity to respond to user input. |
+| `uk-select:search` | Fired after the value inside search box has changed.                                  |

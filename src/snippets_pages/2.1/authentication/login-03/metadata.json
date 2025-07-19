@@ -1,0 +1,10 @@
+{
+  "category": "authentication",
+  "id": "login-03",
+  "text": "login-03",
+  "title": "Login",
+  "description": "An email-only login page.",
+  "frame": {
+    "height": 770
+  }
+}

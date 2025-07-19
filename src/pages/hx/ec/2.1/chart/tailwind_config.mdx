@@ -1,0 +1,17 @@
+export const partial = true;
+
+```js
+import franken from "franken-ui/shadcn-ui/preset-quick";
+import chart from "franken-ui/extensions/chart";
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  presets: [
+    franken({
+      extensions: [
+        [chart, {}],
+      ],
+    }),
+  ],
+};
+```

@@ -1,0 +1,96 @@
+---
+group: getting-started
+order: 5
+text: Theming
+title: Theming
+meta:
+  description: Using CSS Variables or Tailwind CSS for theming.
+---
+import Ec from 'snippets/ec.astro';
+import CustomPalette from 'components/partials/custom_palette/latest.astro';
+
+Franken UI, just like shadcn/ui use a simple `background` and `foreground` convention for colors. The `background` variable is used for the background color of the component and the `foreground` variable is used for the text color.
+
+The `background` suffix is omitted when the variable is used for the background color of the component.
+
+Given the following CSS variables:
+
+<Ec version="2.1" path="theming.1" />
+
+The `background` color of the following component will be `hsl(var(--primary))` and the `foreground` color will be `hsl(var(--primary-foreground))`.
+
+<Ec path="theming.2" />
+
+**CSS variables must be defined without color space function**. See the [Tailwind CSS documentation](https://v3.tailwindcss.com/docs/customizing-colors#using-css-variables) for more information.
+
+## List of variables
+
+Here's the list of variables available for customization:
+
+**1\.** For default backgrounds
+
+<Ec version="2.1" path="theming.3" />
+
+**2\.** For muted backgrounds
+
+<Ec version="2.1" path="theming.4" />
+
+**3\.** Background color for cards
+
+<Ec version="2.1" path="theming.5" />
+
+**4\.** Background color for popovers
+
+<Ec version="2.1" path="theming.6" />
+
+**5\.** For border color
+
+<Ec version="2.1" path="theming.7" />
+
+**6\.** Border color for inputs
+
+<Ec version="2.1" path="theming.8" />
+
+**7\.** For primary colors
+
+<Ec version="2.1" path="theming.9" />
+
+**8\.** For secondary colors
+
+<Ec version="2.1" path="theming.10" />
+
+**9\.** For accents such as hover effects
+
+<Ec version="2.1" path="theming.11" />
+
+**10\.** For destructive actions
+
+<Ec version="2.1" path="theming.12" />
+
+**11\.** For focus ring
+
+<Ec version="2.1" path="theming.13" />
+
+## Adding new colors
+
+To add new colors, simply add them to your main CSS file.
+
+<Ec version="2.1" path="theming.22" />
+
+You can now use the `warning` utility class in your components.
+
+<Ec path="theming.16" />
+
+## Custom palette
+
+<CustomPalette />
+
+## Setting the default palette
+
+To set your newly added palette as the default, simply update the script in your `<head>` tag to reference the new theme name, like so:
+
+<Ec version="2.1" path="theming.21" />
+
+## Adding to theme switcher
+
+To register your newly added palette with the [Theme Switcher](/docs/2.1/theme-switcher#custom-palette), please refer to the corresponding documentation or guide for step-by-step instructions on how to integrate it.

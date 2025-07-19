@@ -1,0 +1,77 @@
+---
+group: components
+text: Button
+title: Button
+lead: Easily create nice looking buttons, which come in different styles.
+meta:
+  description: Easily create nice looking buttons, which come in different styles.
+---
+import Ec from 'snippets/ec.astro';
+
+
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+To apply this component, add the `.uk-btn` class and a modifier such as `.uk-btn-default` to an `<a>` or `<button>` element. Add the `disabled` attribute to a `<button>` element to disable the button.
+
+<Ec path="button.1" />
+
+<Snippet component="button.basic" />
+
+## Style modifiers
+
+There are several style modifiers available. Just add one of the following classes to apply a different look.
+
+| Class                 | Description                               |
+| --------------------- | ----------------------------------------- |
+| `.uk-btn-default`     | Default button style.                     |
+| `.uk-btn-ghost`       | Applies a ghost style.                    |
+| `.uk-btn-primary`     | Indicates the primary action.             |
+| `.uk-btn-secondary`   | Indicates an important action.            |
+| `.uk-btn-destructive` | Indicates a dangerous or negative action. |
+| `.uk-btn-text`        | Applies an typographic style.             |
+| `.uk-btn-link`        | Applies an plain link style.              |
+
+<Ec path="button.2" />
+
+<Snippet component="button.style" />
+
+## Size modifiers
+
+There are several size modifiers available. Just add one of the following classes to make the button smaller or larger.
+
+| Class        | Description               |
+| ------------ | ------------------------- |
+| `.uk-btn-xs` | Applies extra small size. |
+| `.uk-btn-sm` | Applies small size.       |
+| `.uk-btn-md` | Applies medium size.      |
+| `.uk-btn-lg` | Applies large size.       |
+
+<Snippet component="button.size" />
+
+## Width modifiers
+
+You can use Tailwind CSS utility classes alongside button classes and the it will follow its width.
+
+<Snippet component="button.width" />
+
+## Icon
+
+Use `.uk-btn-icon` class to create an icon button, which can be used for social icons or toolbars.
+
+<Snippet component="button.icon" />
+
+## Group
+
+To create a button group, add the `.uk-btn-group` class to a `<div>` element around the buttons. That's it! No further markup is needed.
+
+<Snippet component="button.group" />
+
+## Button with dropdowns
+
+A button can be used to trigger a dropdown menu from the [Dropdown component](/docs/2.1/dropdown).
+
+<Ec path="button.3" />
+
+<Snippet version="2.1" component="button.dropdown" />

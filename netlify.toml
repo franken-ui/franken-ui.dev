@@ -1,0 +1,31 @@
+[[redirects]]
+  from = "/docs/changelog"
+  to = "/docs/2.1/release-notes"
+  status = 301
+
+[[redirects]]
+  from = "/docs/upgrade"
+  to = "/docs/2.1/release-notes"
+  status = 301
+
+[[redirects]]
+  from = "/docs/introduction"
+  to = "/docs/2.1/installation"
+  status = 301
+
+[[redirects]]
+  from = "/docs/2.0/introduction"
+  to = "/docs/2.1/installation"
+  status = 301
+
+[[redirects]]
+  from = "/docs/2.0/:slug"
+  to = "https://dos.franken-ui.dev/docs/2.0/:slug"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/docs/:slug"
+  to = "/docs/2.1/:slug"
+  status = 301
+  force = true

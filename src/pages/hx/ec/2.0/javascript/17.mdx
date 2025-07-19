@@ -1,0 +1,9 @@
+export const partial = true;
+
+```js
+// Calls the update hook on components registered on the element itself, its parents and children.
+UIkit.update((element = document.body), (type = "update"));
+
+// Updates the component itself.
+component.$emit((type = "update"));
+```

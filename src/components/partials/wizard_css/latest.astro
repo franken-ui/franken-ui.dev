@@ -1,0 +1,117 @@
+---
+import Utilities from "components/partials/utilities.astro";
+import WizardTab from "components/wizard_tab.astro";
+import Ec from "snippets/ec.astro";
+---
+
+<div class="mt-10">
+  <WizardTab />
+
+  <ul class="wizard uk-switcher mt-2">
+    <li class="uk-active">
+      <div class="mt-10"></div>
+
+      <p class="uk-paragraph">
+        Perfect for beginners, the simplest installation can be done using CDN.
+      </p>
+
+      <Ec version="2.1" path="installation.cdn" />
+
+      <p class="uk-paragraph">
+        Optionally, you can include a pre-built (<code class="uk-codespan"
+          >~91.45 kB</code
+        > gzipped) Tailwind CSS utility classes to complement with Franken UI. These
+        utility classes are pre-extracted from Tailwind CSS. If you find this too
+        large, you can always switch to a proper build process.
+      </p>
+
+      <Ec version="2.1" path="installation.utilities" />
+
+      <p class="uk-paragraph">The following utility classes are available:</p>
+
+      <Utilities />
+    </li>
+    <li>
+      <div class="mt-10"></div>
+
+      <p class="uk-paragraph">
+        First, install the latest version of Franken UI using NPM:
+      </p>
+
+      <Ec version="2.1" path="installation.tailwind_v4" />
+
+      <p class="uk-paragraph">
+        Next, configure your <code class="uk-codespan">vite.config.js</code> file
+        to use the Franken UI plugin.
+      </p>
+
+      <Ec version="2.1" path="installation.vite_config" />
+
+      <p class="uk-paragraph">
+        Once the plugin is configured, import the <code class="uk-codespan"
+          >franken-ui.css</code
+        > file into your main CSS file:
+      </p>
+
+      <Ec version="2.1" path="installation.css" />
+
+      <p class="uk-paragraph">
+        Alternatively, you can pull Franken UI CSS directly from the <code
+          class="uk-codespan">node_modules</code
+        > directory.
+      </p>
+
+      <Ec version="2.1" path="installation.css_node_modules" />
+
+      <p class="uk-paragraph">
+        <span class="uk-label uk-label-primary">Note</span> Franken UI compiles CSS
+        behind the scenes, so make sure to import the Vite plugin at the top of your
+        <code class="uk-codespan">vite.config.js</code> file or second, right before
+        any other CSS plugins, to avoid issues when importing it into your CSS file.
+      </p>
+
+      <h3 class="uk-h4 mt-10">Using Franken UI with Tailwind CSS v4</h3>
+
+      <p class="uk-paragraph">
+        If you'd like to use Tailwind CSS v4 alongside Franken UI, you can
+        manually configure your <code class="uk-codespan">@theme</code> directives
+        like so:
+      </p>
+
+      <Ec version="2.1" path="installation.tailwind_config" />
+
+      <p class="uk-paragraph">
+        This will allow you to use utilities like <code class="uk-codespan"
+          >bg-primary</code
+        >, <code class="uk-codespan">bg-muted</code>, and other custom utility
+        classes within your project. Make sure to update your <code
+          class="uk-codespan">vite.config.js</code
+        > as well.
+      </p>
+
+      <Ec version="2.1" path="installation.tailwind_v4_vite_config" />
+
+      <p class="uk-paragraph">
+        <span class="uk-label uk-label-primary">Note</span> If you choose to use
+        Franken UI alongside Tailwind CSS v4, make sure to set <code
+          class="uk-codespan">preflight</code
+        > to <code class="uk-codespan">false</code>
+        in your <code class="uk-codespan">vite.config.js</code>, as Tailwind
+        already includes this feature. You also need to set <code
+          class="uk-codespan">layer</code
+        > to <code class="uk-codespan">true</code> to make the class hirarchy equal.
+        Adding components inside <code class="uk-codespan">layerExceptions</code
+        >
+        will disable CSS layering for those components, placing them at the highest
+        level of hierarchy.
+      </p>
+    </li>
+  </ul>
+
+  <p class="uk-paragraph">
+    Once you're done, you may now proceed <a
+      class="uk-link"
+      href="/docs/2.1/javascript">adding JavaScript</a
+    >.
+  </p>
+</div>

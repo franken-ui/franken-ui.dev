@@ -1,0 +1,55 @@
+---
+import { readdirSync, readFileSync } from "fs";
+import { resolve } from "path";
+
+const { version = "2.1", page } = Astro.props;
+
+const route = `/hx/ec/${version}/snippets_pages/${page.replace(".", "/")}`;
+
+const path = resolve(
+  "src",
+  "snippets_pages",
+  version,
+  `${page.replace(".", "/")}`,
+);
+const files = readdirSync(path)
+  .filter((a) => a !== "metadata.json")
+  .map((a) => {
+    return {
+      filename: a,
+      lines:
+        readFileSync(`${path}/${a}`, "utf-8").trim().split("\n").length || 1,
+    };
+  });
+---
+
+<ul class="uk-tab uk-tab-bottom" data-uk-switcher="connect: #codes">
+  {
+    files.map((a, b) => (
+      <li class={b === 0 ? "uk-active" : ""}>
+        <a href="#" style="--uk-tab-item-padding: 0.5rem 1rem 0.75rem 1rem">
+          {a.filename}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<ul id="codes" class="uk-switcher mt-4">
+  {
+    files.map((a, b) => (
+      <li class={b === 0 ? "uk-active" : ""}>
+        <div class="ec">
+          <div
+            class="animate-pulse bg-muted"
+            hx-trigger="intersect"
+            hx-get={`${route}/${a.filename.replace(/\.[^/.]+$/, "")}`}
+            hx-select="figure"
+            hx-swap="outerHTML"
+            style={`height: calc(calc(var(--ec-codeLineHt) * ${a.lines}) + calc(var(--ec-codePadBlk) * 2) + calc(var(--ec-brdWd) * 2))`}
+          />
+        </div>
+      </li>
+    ))
+  }
+</ul>

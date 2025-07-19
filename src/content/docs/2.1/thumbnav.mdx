@@ -1,0 +1,41 @@
+---
+group: components
+text: Thumbnav
+title: Thumbnav
+lead: Create a flexible thumbnail navigation.
+meta:
+  description: Create a flexible thumbnail navigation.
+---
+import Ec from 'snippets/ec.astro';
+
+
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+To create a navigation with thumbnails, use the following classes. This component is built with Flexbox. So to align a thumbnav, you can use utility classes from Tailwind CSS.
+
+| Class          | Description                                                                                                                            |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `.uk-thumbnav` | Add this class to a `<ul>` element to define the Thumbnav component. Nest your thumbnail images inside `<a>` elements within the list. |
+| `.uk-active `  | Add this class to a list item to apply an active state.                                                                                |
+
+<Ec path="thumbnav.1" />
+
+<Snippet component="thumbnav.basic" />
+
+## Vertical alignment
+
+The thumbnav can also be displayed vertically. Just add the `.uk-thumbnav-vertical` modifier.
+
+<Ec path="thumbnav.2" />
+
+<Snippet component="thumbnav.vertical" />
+
+## Position as overlay
+
+To position the thumbnav on top of an element or the [Slideshow component](/docs/2.1/slideshow) for example, add one of the `.uk-position-*` classes from the [Position component](/docs/2.1/position) to a `div` element wrapping the thumbnav. To create a position context on the container, add the `.uk-position-relative` class.
+
+<Ec path="thumbnav.3" />
+
+<Snippet component="thumbnav.overlay" />

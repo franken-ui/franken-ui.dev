@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import data from "data/examples";
+
+const { active } = Astro.props;
+
+const example = data.find((a) => a.slug === active);
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/images/examples/*.{jpeg,jpg,png,gif}",
+);
+const image = (await images[`/src/images/examples/${active}-light.png`]())
+  .default;
+---
+
+<div id="example">
+  <div class="hidden xl:block" style={`height: ${example?.height}`}>
+    <div
+      class="bg-muted h-full w-full animate-pulse"
+      hx-get={`/hx/examples/frames/${active}`}
+      hx-trigger="intersect"
+      hx-swap="outerHTML"
+    >
+    </div>
+  </div>
+
+  <div
+    class="uk-rounded uk-shadow border-border overflow-hidden border xl:hidden"
+  >
+    <div class="dark:hidden">
+      <Image
+        alt=""
+        sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
+        src={images[`/src/images/examples/${active}-light.png`]()}
+        widths={[240, 540, 720, image.width]}
+      />
+    </div>
+
+    <div class="hidden dark:block">
+      <Image
+        alt=""
+        sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${image.width}px`}
+        src={images[`/src/images/examples/${active}-dark.png`]()}
+        widths={[240, 540, 720, image.width]}
+      />
+    </div>
+  </div>
+
+  <div role="alert" class="uk-alert mt-4 xl:hidden">
+    <strong>Note:</strong> You are viewing a static image preview. Please switch
+    to a larger screen to experience the real thing.
+  </div>
+</div>

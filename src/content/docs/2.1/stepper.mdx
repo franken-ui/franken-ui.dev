@@ -1,0 +1,42 @@
+---
+group: components
+text: Stepper
+title: Stepper
+lead: The stepper component can be used to show a numbered list of steps next to a form component to indicate the progress and number of steps that are required to complete and submit the form data.
+meta:
+  description: Create a stepper to show the number of steps required to complete something.
+---
+import Ec from 'snippets/ec.astro';
+
+
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+To create a stepper, just add the `.uk-stepper` class to a `<ul>` tag.
+
+<Ec path="stepper.1" />
+
+<Snippet component="stepper.basic" />
+
+## Active modifier
+
+This example can be used to highlight the current step in the stepper, indicating which step is actively being worked on.
+
+<span class="uk-label uk-label-primary">Note</span> When you add the
+`.uk-active` class to one of your `li` tags, the previous `li` tags will
+automatically change colors.
+
+<Snippet component="stepper.active" />
+
+## Checked modifier
+
+To show a checkmark when the step has been finished, add the `.uk-stepper-checked` to one of your `li` tag.
+
+<Snippet component="stepper.checked" />
+
+## Counter modifier
+
+This example can be used to display step numbers within the stepper, helping to indicate the sequence of steps. Each li tag will be numbered to show its position in the progression.
+
+<Snippet component="stepper.counter" />

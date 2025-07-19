@@ -1,0 +1,20 @@
+export const partial = true;
+
+```js
+import { defineConfig } from "vite";
+import franken from "franken-ui/plugin-vite";
+import chart from "franken-ui/extensions/chart";
+
+export default defineConfig({
+  plugins: [
+    franken({
+      extensions: [
+        [chart, {}],
+      ],
+      preflight: false,
+      layer: true,
+      layerExceptions: ["chart"],
+    }),
+  ],
+});
+```

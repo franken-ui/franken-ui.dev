@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-border: hsl(var(--border) / var(--border-alpha, 1));
+  --color-input: hsl(var(--input) / var(--input-alpha, 1));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive) / var(--destructive-alpha, 1));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-ring: hsl(var(--ring));
+
+  --font-geist-sans: Geist Sans, ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+  --font-geist-mono: Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@layer base {
+  ::selection {
+    background-color: oklch(54.6% 0.245 262.881);
+    color: #fff;
+  }
+
+  :root {
+    --divider-pattern: hsl(240 5.9% 90%);
+  }
+
+  .dark {
+    --divider-pattern: hsl(240 3.7% 15.9%);
+  }
+
+  .root-layout {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-rows: 1fr 1px auto 1px auto;
+    padding-top: calc(var(--spacing) * 14.25);
+
+    @media (width >= 64rem) {
+      grid-template-columns: var(--container-2xs) 2.5rem minmax(0, 1fr) 2.5rem;
+      padding-top: calc(var(--spacing) * 14.25);
+    }
+
+    @media (width >= 80rem) {
+      grid-template-columns: var(--container-2xs) 2.5rem minmax(0, 1fr) 2.5rem;
+    }
+  }
+
+  .root-sidebar {
+    position: relative;
+    grid-column-start: 1;
+    grid-row: 1 / -1;
+    grid-row-start: 1;
+    @media (width < 64rem) {
+      display: none;
+    }
+  }
+
+  .root-sidebar-scrollable-area {
+    position: sticky;
+    inset: 0;
+    max-height: 100dvh;
+    width: var(--container-2xs);
+    overflow-y: auto;
+    padding: calc(var(--spacing) * 6);
+    position: sticky;
+    top: calc(var(--spacing) * 14.25);
+    bottom: calc(var(--spacing) * 0);
+    left: calc(var(--spacing) * 0);
+    height: 100%;
+    max-height: calc(100dvh - (var(--spacing) * 14.25));
+    width: var(--container-2xs);
+    overflow-y: auto;
+    padding: calc(var(--spacing) * 6);
+  }
+
+  .root-divider-l {
+    grid-column-start: 2;
+    grid-row: span 5 / span 5;
+    grid-row-start: 1;
+    border-inline-style: var(--tw-border-style);
+    border-inline-width: 1px;
+    border-inline-color: var(--divider-pattern);
+    background-image: repeating-linear-gradient(
+      315deg,
+      var(--divider-pattern) 0,
+      var(--divider-pattern) 1px,
+      transparent 0,
+      transparent 50%
+    );
+    background-size: 10px 10px;
+    background-attachment: fixed;
+    @media (width < 64rem) {
+      display: none;
+    }
+  }
+
+  .root-divider-r {
+    grid-column-start: 4;
+    grid-row: span 5 / span 5;
+    grid-row-start: 1;
+    border-inline-style: var(--tw-border-style);
+    border-inline-width: 1px;
+    border-inline-color: var(--divider-pattern);
+    background-image: repeating-linear-gradient(
+      315deg,
+      var(--divider-pattern) 0,
+      var(--divider-pattern) 1px,
+      transparent 0,
+      transparent 50%
+    );
+    background-size: 10px 10px;
+    background-attachment: fixed;
+    @media (width < 64rem) {
+      display: none;
+    }
+  }
+
+  .root-main {
+    position: relative;
+    grid-row-start: 1;
+    display: grid;
+    grid-template-columns: subgrid;
+    @media (width >= 64rem) {
+      grid-column-start: 3;
+    }
+  }
+
+  .snippet {
+    position: relative;
+    z-index: 1;
+  }
+
+  .copy {
+    position: absolute;
+    right: 0;
+    top: 13px;
+
+    @apply text-muted-foreground hover:text-muted-foreground/80 cursor-pointer;
+  }
+
+  @media (min-width: 768px) {
+    .preview {
+      border-bottom-width: 1px;
+      border-color: hsl(var(--border) / var(--border-alpha, 1));
+      padding-bottom: 2.5rem;
+      padding-top: 1.5rem;
+    }
+  }
+
+  .preview-container {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.3'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  #preview {
+    transition: max-width 0.5s ease-in-out; /* Combined shorthand */
+  }
+
+  .btn-search:hover {
+    background-color: hsl(var(--accent));
+  }
+
+  .btn-search > kbd {
+    background-color: hsl(var(--muted));
+    font-family:
+      Geist Mono,
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      "Liberation Mono",
+      "Courier New",
+      monospace;
+  }
+
+  .btn-search,
+  .btn-search > kbd {
+    border-radius: var(--topbar-search-kbd-radius, var(--uk-global-radius));
+    align-items: center;
+    border-width: 1px;
+    border-color: hsl(var(--border) / var(--border-alpha, 1));
+    color: hsl(var(--muted-foreground));
+  }
+  .btn-search {
+    display: flex;
+    height: var(--topbar-search-height, var(--uk-btn-height));
+    width: 100%;
+    justify-content: space-between;
+    background-color: hsl(var(--muted) / 0.5);
+    padding: var(--topbar-search-padding, 0.75rem);
+  }
+  .btn-search:hover {
+    color: hsl(var(--accent-foreground));
+  }
+  .btn-search > kbd {
+    pointer-events: none;
+    user-select: none;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    display: none;
+    flex: none;
+  }
+
+  @media (min-width: 1024px) {
+    .btn-search > kbd {
+      display: inline-block;
+    }
+  }
+
+  .fr-nav-default > li.uk-active > a {
+    --uk-nav-item-bg: hsl(var(--accent));
+    --uk-nav-item-color: hsl(var(--accent-foreground));
+  }
+
+  .announcement {
+    @apply bg-primary text-primary-foreground hidden items-center rounded-full px-3 py-1 text-xs font-medium leading-5 xl:flex;
+  }
+
+  .chart-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    @apply border-border border p-4;
+  }
+
+  .chart-card:hover {
+    background-color: hsl(var(--muted));
+
+    @apply transition-colors;
+  }
+}

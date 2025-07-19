@@ -1,0 +1,12 @@
+---
+import type { GetStaticPaths } from "astro";
+import paths from "data/snippets/2.0";
+import { Code } from "astro-expressive-code/components";
+
+export const partial = true;
+export const getStaticPaths = paths satisfies GetStaticPaths;
+
+const { content } = Astro.props;
+---
+
+<Code code={content} lang="html" />

@@ -1,0 +1,27 @@
+---
+group: components
+hidden: true
+alias: chart-introduction
+text: Area Chart
+title: Area Chart
+lead: An area chart visually represents data over time, displaying trends and patterns through filled-in areas under a line graph.
+tbc: false
+breadcrumb:
+  - text: "Chart"
+    id: "chart-introduction"
+  - text: "Area Chart"
+    id: "chart-area"
+---
+
+import Snippet from "snippets/component.astro";
+import chart from "franken-ui/js/chart.iife?url";
+
+## Smooth
+
+<Snippet component="charts_area.smooth" />
+
+## Multiple
+
+<Snippet component="charts_area.multiple" />
+
+<script is:inline src={chart} type="module" />

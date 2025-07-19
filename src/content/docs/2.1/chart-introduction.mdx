@@ -1,0 +1,46 @@
+---
+group: components
+text: Chart
+title: Chart
+lead: Easily create nice looking charts, which come in different styles.
+meta:
+  description: Easily create nice looking charts, which come in different styles.
+keywords: line,area
+webc: true
+---
+
+import Ec from "snippets/ec.astro";
+import Installation from "components/partials/installation.astro";
+import Snippet from "snippets/component.astro";
+import Charts from "components/partials/charts.astro";
+import WizardChart from 'components/partials/wizard_chart/latest.astro';
+
+## Installation
+
+Under the hood, Franken UI uses [ApexCharts](https://apexcharts.com). Franken UI provides a thin layer of compatibility and serves as a glue between ApexCharts and shadcn/ui so you don't have to configure anything by yourself.
+
+<WizardChart />
+
+## Usage
+
+Once everything is configured, you may now use the `<uk-chart>` markup in your HTML code with one `<script type="application/json"></script>` tag as options reference.
+
+## Browse charts
+
+<Charts version="2.1" />
+
+## Reactivity
+
+By default, the `<uk-chart>` component is not reactive. This is a deliberate design choice, as using [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) can be computationally expensive. As a result, changes to the referenced `<script type="application/json">` tag will not trigger an update.
+
+To enable reactivity, simply add the `reactive` attribute to the `<uk-chart>` component. This will use [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) under the hood to monitor the `<script>` tag for changes.
+
+<Ec path="chart_introduction.2" />
+
+## Attributes
+
+| Name                     | Type    | Default | Description                                                                                                                                                |
+| ------------------------ | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `force-prevent-rerender` | Boolean | false   | Forcefully prevents component rerendering.                                                                                                                 |
+| `cls-custom`             | String  |         | Allows you to add custom CSS classes, which will be attached to the `<div>` tag.                                                                           |
+| `reactive`               | Boolean | false   | Enables reactivity by using `MutationObserver` to monitor the referenced `<script>` element for changes, triggering updates to the `<uk-chart>` component. |

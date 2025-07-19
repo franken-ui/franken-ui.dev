@@ -1,0 +1,911 @@
+---
+group: getting-started
+order: 0
+text: Release Notes
+title: Release Notes
+meta:
+  robots: noindex
+tbc: false
+---
+import Ec from 'snippets/ec.astro';
+
+## September 17, 2025
+
+- **Version**: v2.1.0
+
+### Changes
+
+- The `v2.1.0-next.22` release has been promoted to `v2.1.0`. No changes have been made since.
+
+## September 10, 2025
+
+- **Version**: v2.1.0-next.22
+
+### Changes
+
+- Fixed datepicker with a predefined value (specifically, in format `YYYY-MM-DD`) being off by one day for users in negative time zones.
+
+## September 6, 2025
+
+- **Version**: v2.1.0-next.20
+
+### Changes
+
+- Fixed a [critical bug in the calendar and datepicker components](https://github.com/franken-ui/ui/issues/100) that went unnoticed, rendering them unusable for users in negative time zones.
+
+## August 31, 2025
+
+- **Version**: v2.1.0-next.19
+
+### Changes
+
+- Add the default theme to `:root {}`. It is now possible to implement basic theming for CDN users. See the [Theming](/docs/2.1/theming#custom-palette) documentation to learn more.
+- Fix the opacity of `uk-divider-icon`.
+
+## July 18, 2025
+
+- **Version**: v2.1.0-next.15
+
+Version 2.1 is now available for public beta.
+
+This version is a planned LTS release. Features are now locked, meaning no new features will be added. That said, ongoing maintenance and updates to upstream dependencies will continue. While this version is not expected to break existing functionality, some minor adjustments are unavoidable. Here's what might break and what to do about it.
+
+### Breaking Changes
+
+#### 1. Chart component externalized
+
+* **Impact**: *Low (NPM users only)*
+
+Due to our implementation of `@layer` directives, the chart has been removed from the core styling because we cannot control the CSS generation of Apex Charts. This change is intended to avoid hierarchy issues and ensure that the CSS for Apex Charts is at the highest level of hierarchy. Please refer to the [installation documentation](/docs/2.1/chart-introduction#option-2-using-npm) for instructions on how to apply changes.
+
+#### 2. Custom `<uk-select>` active color removed
+
+* **Impact**: *Medium (all users)*
+
+The default active color for custom `uk-select` has been deliberately removed. You now have full control over how selected items look.
+
+Here's an example on how to fix it:
+
+<Ec version="2.1" path="release_notes.5" />
+
+This is just one way. You can customize it however you want: locally via class, inline style, `<style>` block, etc.
+
+#### 3. Alpha-channels on dark mode
+
+* **Impact**: *Low (NPM users only)*
+
+The new color system now utilizes alpha channels instead of contrast-based colors. If you are using legacy colors, a custom palette, or a color generator, they will still function as expected. However, you will need to manually override three CSS variables for compatibility. Please refer to the [Custom Palette Documentation](/docs/2.1/theming#custom-palette) for instructions on how to apply these changes.
+
+
+### Other noteworthy updates
+
+As part of the *"Can I copy your homework? Yeah, sure, just change it up a bit so we don't look the same!"* principle, here are some changes to help your site not look like a straight clone.
+
+What's new under the hood:
+
+- We are no longer bound to Tailwind CSS. This project is now a Vite plugin. Tailwind CSS plugin will still work for now, but if they drop v3 support, we'll follow.
+- Using `@layer` for both Vite and CDN builds.
+- Localized CSS variables per component. You can now customize things in real time.
+- New color palettes. Same palette as `shadcn/ui`, but we use HSL (not OKLCH). If you're on legacy colors or a generator, it'll still work.
+- For CDN users, the `utilities.min.css` file, while 100% optional, is now highly recommended. Color utilities have been moved from `core.min.css` to `utilities.min.css`. If you still prefer not to include it on your site, it's easy to address this. Just ensure that you wrap your utilities inside the `@layer utilities {}` directive.
+
+There are also many behind-the-scenes updates that are not officially included in this version but have been implemented. These updates are primarily due to their size, which could potentially block the release of version 2.1, and to avoid overpromising. Please note that this is still the work of a single individual. If you'd like to help keep the project moving forward, consider supporting via [GitHub Sponsors](https://github.com/sponsors/sveltecult) or [Ko-fi](https://ko-fi.com/sveltecult).
+
+That's all for now.
+
+---
+
+## February 22, 2025
+
+- **Version**: v2.0.0
+
+The `v2.0.0-internal.45` release has been promoted to `v2.0.0`. This release includes all the changes from the internal release. No changes have been made since the internal release.
+
+---
+
+## February 15, 2025  
+
+- **Version**: v2.0.0-internal.45
+
+### Breaking Changes
+
+#### 1. Root layout update for charting component
+
+- **Impact**: *Very Low*  
+
+To support the new charting component, please update your root layout to accept the charting feature.
+
+**Changes**:
+
+- Add the following line to your root layout's script block:
+  
+<Ec path="release_notes.1" />
+
+#### 2. Theme switcher update for charting component
+
+- **Impact**: *Very Low*  
+
+To support the new charting component, please update your `<uk-theme-switcher>` to accept the charting feature.
+
+**Changes**:
+
+- Add the following line to your `<uk-theme-switcher>` component:
+
+<Ec path="release_notes.2" />
+
+---
+
+## February 12, 2025
+
+- **Version**: v2.0.0-internal.44
+
+Please read this document in its entirety before deciding to upgrade to version 2.0. This major release includes several breaking changes, but upgrading is optional. If you're satisfied with version 1.0, you can continue using it without issues. However, if you choose to upgrade to 2.0, please be aware of the following changes.
+
+### Mini design system
+
+On top of the original shadcn/ui, a mini design system has been introduced for Franken UI. By doing so, it address the potential "me-too" problem that can arise from the library's ease of use into "Can I copy your homework? Yeah, sure, just change it up a bit so we don't look the same!" – and actually mean it, thanks to the system's built-in flexibility and customization options.
+
+#### Sizing
+
+Components such as buttons, inputs, selects, pagination, and many others have had their base size adjusted to accommodate additional size variants, including `*-xs`, `*-sm`, `*-md`, and `*-lg`. Providing developers with more options out of the box.
+
+#### Padding
+
+Padding has been unified for components such as modals, cards, and others, ensuring a more consistent UI.
+
+#### Radii, shadows and font sizes
+
+Border radii have been unified across all components and reduced to two options: a base radius and a smaller radius. For example, the dropdown component now uses the base radius for the dropdown itself, while the inner items use the smaller radius. A similar approach has been taken with shadows and font sizes.
+
+This design system utilizes CSS variables to make it easy for developers to customize border radii and shadows according to their preferences.
+
+### Web components
+
+For better compatibility with reactive frameworks, web components have undergone major changes, too. If you're using these components, you'll need to update your code accordingly. Refer to the documentation for specific guidance on updating these components.
+
+- [Command](/docs/2.1/command)
+- [Input PIN](/docs/2.1/input-pin)
+- [Input Tag](/docs/2.1/input-tag)
+- [Select](/docs/2.1/select)
+- [Theme Switcher](/docs/2.1/theme-switcher)
+
+### Root layout
+
+To ensure seamless implementation of our mini design system, a change to your root layout is necessary. Franken UI now stores theme settings under a single key, `__FRANKEN__`, which is then parsed accordingly. For detailed instructions on how to update your `<head>` tag, please refer to the [Theme Switcher](/docs/2.1/theme-switcher) documentation.
+
+### Component Reduction
+
+To reduce the maintenance burden and improve compatibility, certain components have been removed or replaced with alternatives, often due to better solutions provided by Tailwind CSS.
+
+The following table outlines the components that have been removed or replaced:
+
+| Component        | Status                                                   |
+| ---------------- | -------------------------------------------------------- |
+| Align            | Removed                                                  |
+| Article          | Can be reimplemented with [Typography](/docs/2.1/typography) |
+| Background       | Removed                                                  |
+| Column           | Removed                                                  |
+| Countdown        | Removed                                                  |
+| Description List | Removed                                                  |
+| Flex             | Can be replaced by Tailwind CSS                          |
+| Grid             | Can be replaced by Tailwind CSS                          |
+| Height           | Can be replaced by Tailwind CSS                          |
+| Iconnav          | Can be reimplemented with `.flex` and `.uk-btn-icon`     |
+| Margin           | Can be replaced by Tailwind CSS                          |
+| Marker           | Removed                                                  |
+| Navbar           | Can be reimplemented with `.flex` and [Drop](/docs/2.1/drop) |
+| Overlay          | Removed                                                  |
+| Padding          | Can be replaced by Tailwind CSS                          |
+| Search           | Removed                                                  |
+| Section          | Removed                                                  |
+| Tile             | Removed                                                  |
+| Upload           | Removed                                                  |
+| Visibility       | Can be replaced by Tailwind CSS                          |
+| Width            | Can be replaced by Tailwind CSS                          |
+
+### Others
+
+**1\.** Make sure to set a `min-width` on your [Dropdown](/docs/2.1/dropdown) components.
+
+<Ec path="release_notes.4" />
+
+### Class names
+
+The following is a comprehensive list of class names that have been shortened, changed, or dropped to improve readability and maintainability. To update your code, you can perform careful find and replace operations for some of these changes.
+
+<span class="uk-label uk-label-primary">Note</span> Some of the dropped classes
+have better implementations available in Tailwind CSS, which can be used as
+alternatives.
+
+| Class                                | Replacement                            |
+| ------------------------------------ | -------------------------------------- |
+| `.uk-alert-danger`                   | `.uk-alert-destructive`                |
+| `.uk-alert-description`              | -                                      |
+| `.uk-align-center`                   | -                                      |
+| `.uk-align-left`                     | -                                      |
+| `.uk-align-left@l`                   | -                                      |
+| `.uk-align-left@m`                   | -                                      |
+| `.uk-align-left@s`                   | -                                      |
+| `.uk-align-left@xl`                  | -                                      |
+| `.uk-align-right`                    | -                                      |
+| `.uk-align-right@l`                  | -                                      |
+| `.uk-align-right@m`                  | -                                      |
+| `.uk-align-right@s`                  | -                                      |
+| `.uk-align-right@xl`                 | -                                      |
+| `.uk-animation-fade`                 | `.uk-anmt-fade`                        |
+| `.uk-animation-fast`                 | `.uk-anmt-fast`                        |
+| `.uk-animation-kenburns`             | `.uk-anmt-kenburns`                    |
+| `.uk-animation-reverse`              | `.uk-anmt-reverse`                     |
+| `.uk-animation-scale-down`           | `.uk-anmt-scale-down`                  |
+| `.uk-animation-scale-up`             | `.uk-anmt-scale-up`                    |
+| `.uk-animation-shake`                | `.uk-anmt-shake`                       |
+| `.uk-animation-slide-bottom`         | `.uk-anmt-slide-bottom`                |
+| `.uk-animation-slide-bottom-medium`  | `.uk-anmt-slide-bottom-md`             |
+| `.uk-animation-slide-bottom-small`   | `.uk-anmt-slide-bottom-sm`             |
+| `.uk-animation-slide-left`           | `.uk-anmt-slide-left`                  |
+| `.uk-animation-slide-left-medium`    | `.uk-anmt-slide-left-md`               |
+| `.uk-animation-slide-left-small`     | `.uk-anmt-slide-left-sm`               |
+| `.uk-animation-slide-right`          | `.uk-anmt-slide-right`                 |
+| `.uk-animation-slide-right-medium`   | `.uk-anmt-slide-right-md`              |
+| `.uk-animation-slide-right-small`    | `.uk-anmt-slide-right-sm`              |
+| `.uk-animation-slide-top`            | `.uk-anmt-slide-top`                   |
+| `.uk-animation-slide-top-medium`     | `.uk-anmt-slide-top-md`                |
+| `.uk-animation-slide-top-small`      | `.uk-anmt-slide-top-sm`                |
+| `.uk-animation-stroke`               | `.uk-anmt-stroke`                      |
+| `.uk-animation-toggle`               | `.uk-anmt-toggle`                      |
+| `.uk-article`                        | -                                      |
+| `.uk-article-meta`                   | -                                      |
+| `.uk-article-title`                  | -                                      |
+| `.uk-background-blend-color`         | -                                      |
+| `.uk-background-blend-color-burn`    | -                                      |
+| `.uk-background-blend-color-dodge`   | -                                      |
+| `.uk-background-blend-darken`        | -                                      |
+| `.uk-background-blend-difference`    | -                                      |
+| `.uk-background-blend-exclusion`     | -                                      |
+| `.uk-background-blend-hard-light`    | -                                      |
+| `.uk-background-blend-hue`           | -                                      |
+| `.uk-background-blend-lighten`       | -                                      |
+| `.uk-background-blend-luminosity`    | -                                      |
+| `.uk-background-blend-multiply`      | -                                      |
+| `.uk-background-blend-overlay`       | -                                      |
+| `.uk-background-blend-saturation`    | -                                      |
+| `.uk-background-blend-screen`        | -                                      |
+| `.uk-background-blend-soft-light`    | -                                      |
+| `.uk-background-bottom-center`       | -                                      |
+| `.uk-background-bottom-left`         | -                                      |
+| `.uk-background-bottom-right`        | -                                      |
+| `.uk-background-center-center`       | -                                      |
+| `.uk-background-center-left`         | -                                      |
+| `.uk-background-center-right`        | -                                      |
+| `.uk-background-contain`             | -                                      |
+| `.uk-background-cover`               | -                                      |
+| `.uk-background-default`             | -                                      |
+| `.uk-background-height-1-1`          | -                                      |
+| `.uk-background-image@l`             | -                                      |
+| `.uk-background-image@m`             | -                                      |
+| `.uk-background-image@s`             | -                                      |
+| `.uk-background-image@xl`            | -                                      |
+| `.uk-background-muted`               | -                                      |
+| `.uk-background-norepeat`            | -                                      |
+| `.uk-background-primary`             | -                                      |
+| `.uk-background-secondary`           | -                                      |
+| `.uk-background-top-center`          | -                                      |
+| `.uk-background-top-left`            | -                                      |
+| `.uk-background-top-right`           | -                                      |
+| `.uk-background-width-1-1`           | -                                      |
+| `.uk-badge-danger`                   | `.uk-badge-destructive`                |
+| `.uk-blend-color`                    | -                                      |
+| `.uk-blend-color-burn`               | -                                      |
+| `.uk-blend-color-dodge`              | -                                      |
+| `.uk-blend-darken`                   | -                                      |
+| `.uk-blend-difference`               | -                                      |
+| `.uk-blend-exclusion`                | -                                      |
+| `.uk-blend-hard-light`               | -                                      |
+| `.uk-blend-hue`                      | -                                      |
+| `.uk-blend-lighten`                  | -                                      |
+| `.uk-blend-luminosity`               | -                                      |
+| `.uk-blend-multiply`                 | -                                      |
+| `.uk-blend-overlay`                  | -                                      |
+| `.uk-blend-saturation`               | -                                      |
+| `.uk-blend-screen`                   | -                                      |
+| `.uk-blend-soft-light`               | -                                      |
+| `.uk-border-circle`                  | -                                      |
+| `.uk-border-pill`                    | -                                      |
+| `.uk-border-rounded`                 | -                                      |
+| `.uk-box-shadow`                     | -                                      |
+| `.uk-box-shadow-bottom`              | -                                      |
+| `.uk-box-shadow-hover-large`         | -                                      |
+| `.uk-box-shadow-hover-medium`        | -                                      |
+| `.uk-box-shadow-hover-small`         | -                                      |
+| `.uk-box-shadow-hover-xlarge`        | -                                      |
+| `.uk-box-shadow-large`               | -                                      |
+| `.uk-box-shadow-medium`              | -                                      |
+| `.uk-box-shadow-small`               | -                                      |
+| `.uk-box-shadow-xlarge`              | -                                      |
+| `.uk-box-sizing-border`              | -                                      |
+| `.uk-box-sizing-content`             | -                                      |
+| `.uk-button`                         | `.uk-btn`                              |
+| `.uk-button-danger`                  | `.uk-btn-destructive`                  |
+| `.uk-button-default`                 | `.uk-btn-default`                      |
+| `.uk-button-ghost`                   | `.uk-btn-ghost`                        |
+| `.uk-button-link`                    | -                                      |
+| `.uk-button-primary`                 | `.uk-btn-primary`                      |
+| `.uk-button-secondary`               | `.uk-btn-secondary`                    |
+| `.uk-button-small`                   | `.uk-btn-sm`                           |
+| `.uk-button-text`                    | `.uk-btn-text`                         |
+| `.uk-button-xsmall`                  | `.uk-btn-xs`                           |
+| `.uk-card-danger`                    | `.uk-card-destructive`                 |
+| `.uk-card-default`                   | -                                      |
+| `.uk-child-width-1-1@l`              | -                                      |
+| `.uk-child-width-1-1@m`              | -                                      |
+| `.uk-child-width-1-1@s`              | -                                      |
+| `.uk-child-width-1-1@xl`             | -                                      |
+| `.uk-child-width-1-2`                | -                                      |
+| `.uk-child-width-1-2@l`              | -                                      |
+| `.uk-child-width-1-2@m`              | -                                      |
+| `.uk-child-width-1-2@s`              | -                                      |
+| `.uk-child-width-1-2@xl`             | -                                      |
+| `.uk-child-width-1-3`                | -                                      |
+| `.uk-child-width-1-3@l`              | -                                      |
+| `.uk-child-width-1-3@m`              | -                                      |
+| `.uk-child-width-1-3@s`              | -                                      |
+| `.uk-child-width-1-3@xl`             | -                                      |
+| `.uk-child-width-1-4`                | -                                      |
+| `.uk-child-width-1-4@l`              | -                                      |
+| `.uk-child-width-1-4@m`              | -                                      |
+| `.uk-child-width-1-4@s`              | -                                      |
+| `.uk-child-width-1-4@xl`             | -                                      |
+| `.uk-child-width-1-5`                | -                                      |
+| `.uk-child-width-1-5@l`              | -                                      |
+| `.uk-child-width-1-5@m`              | -                                      |
+| `.uk-child-width-1-5@s`              | -                                      |
+| `.uk-child-width-1-5@xl`             | -                                      |
+| `.uk-child-width-1-6`                | -                                      |
+| `.uk-child-width-1-6@l`              | -                                      |
+| `.uk-child-width-1-6@m`              | -                                      |
+| `.uk-child-width-1-6@s`              | -                                      |
+| `.uk-child-width-1-6@xl`             | -                                      |
+| `.uk-child-width-auto`               | -                                      |
+| `.uk-child-width-auto@l`             | -                                      |
+| `.uk-child-width-auto@m`             | -                                      |
+| `.uk-child-width-auto@s`             | -                                      |
+| `.uk-child-width-auto@xl`            | -                                      |
+| `.uk-child-width-expand`             | -                                      |
+| `.uk-child-width-expand@l`           | -                                      |
+| `.uk-child-width-expand@m`           | -                                      |
+| `.uk-child-width-expand@s`           | -                                      |
+| `.uk-child-width-expand@xl`          | -                                      |
+| `.uk-clearfix`                       | -                                      |
+| `.uk-column-1-2`                     | -                                      |
+| `.uk-column-1-2@l`                   | -                                      |
+| `.uk-column-1-2@m`                   | -                                      |
+| `.uk-column-1-2@s`                   | -                                      |
+| `.uk-column-1-2@xl`                  | -                                      |
+| `.uk-column-1-3`                     | -                                      |
+| `.uk-column-1-3@l`                   | -                                      |
+| `.uk-column-1-3@m`                   | -                                      |
+| `.uk-column-1-3@s`                   | -                                      |
+| `.uk-column-1-3@xl`                  | -                                      |
+| `.uk-column-1-4`                     | -                                      |
+| `.uk-column-1-4@l`                   | -                                      |
+| `.uk-column-1-4@m`                   | -                                      |
+| `.uk-column-1-4@s`                   | -                                      |
+| `.uk-column-1-4@xl`                  | -                                      |
+| `.uk-column-1-5`                     | -                                      |
+| `.uk-column-1-5@l`                   | -                                      |
+| `.uk-column-1-5@m`                   | -                                      |
+| `.uk-column-1-5@s`                   | -                                      |
+| `.uk-column-1-5@xl`                  | -                                      |
+| `.uk-column-1-6`                     | -                                      |
+| `.uk-column-1-6@l`                   | -                                      |
+| `.uk-column-1-6@m`                   | -                                      |
+| `.uk-column-1-6@s`                   | -                                      |
+| `.uk-column-1-6@xl`                  | -                                      |
+| `.uk-column-divider`                 | -                                      |
+| `.uk-column-span`                    | -                                      |
+| `.uk-container-large`                | `.uk-container-lg`                     |
+| `.uk-container-small`                | `.uk-container-sm`                     |
+| `.uk-container-xlarge`               | `.uk-container-xl`                     |
+| `.uk-container-xsmall`               | `.uk-container-xs`                     |
+| `.uk-countdown-number`               | -                                      |
+| `.uk-countdown-separator`            | -                                      |
+| `.uk-custom-select`                  | `.uk-cs`                               |
+| `.uk-custom-select-search`           | `.uk-cs-search`                        |
+| `.uk-description-list`               | -                                      |
+| `.uk-description-list-divider`       | -                                      |
+| `.uk-display-block`                  | -                                      |
+| `.uk-display-inline`                 | -                                      |
+| `.uk-display-inline-block`           | -                                      |
+| `.uk-divider-small`                  | `.uk-divider-sm`                       |
+| `.uk-drag`                           | -                                      |
+| `.uk-dragover`                       | -                                      |
+| `.uk-dropbar-large`                  | -                                      |
+| `.uk-dropdown-dropbar-large`         | -                                      |
+| `.uk-dropdown-large`                 | -                                      |
+| `.uk-flex-1`                         | -                                      |
+| `.uk-flex-1@l`                       | -                                      |
+| `.uk-flex-1@m`                       | -                                      |
+| `.uk-flex-1@s`                       | -                                      |
+| `.uk-flex-1@xl`                      | -                                      |
+| `.uk-flex-around`                    | -                                      |
+| `.uk-flex-around@l`                  | -                                      |
+| `.uk-flex-around@m`                  | -                                      |
+| `.uk-flex-around@s`                  | -                                      |
+| `.uk-flex-around@xl`                 | -                                      |
+| `.uk-flex-auto`                      | -                                      |
+| `.uk-flex-between`                   | -                                      |
+| `.uk-flex-between@l`                 | -                                      |
+| `.uk-flex-between@m`                 | -                                      |
+| `.uk-flex-between@s`                 | -                                      |
+| `.uk-flex-between@xl`                | -                                      |
+| `.uk-flex-bottom`                    | -                                      |
+| `.uk-flex-bottom@l`                  | -                                      |
+| `.uk-flex-bottom@m`                  | -                                      |
+| `.uk-flex-bottom@s`                  | -                                      |
+| `.uk-flex-bottom@xl`                 | -                                      |
+| `.uk-flex-center`                    | -                                      |
+| `.uk-flex-center@l`                  | -                                      |
+| `.uk-flex-center@m`                  | -                                      |
+| `.uk-flex-center@s`                  | -                                      |
+| `.uk-flex-center@xl`                 | -                                      |
+| `.uk-flex-column`                    | -                                      |
+| `.uk-flex-column-reverse`            | -                                      |
+| `.uk-flex-column@l`                  | -                                      |
+| `.uk-flex-column@m`                  | -                                      |
+| `.uk-flex-column@s`                  | -                                      |
+| `.uk-flex-column@xl`                 | -                                      |
+| `.uk-flex-first`                     | -                                      |
+| `.uk-flex-first@l`                   | -                                      |
+| `.uk-flex-first@m`                   | -                                      |
+| `.uk-flex-first@s`                   | -                                      |
+| `.uk-flex-first@xl`                  | -                                      |
+| `.uk-flex-initial`                   | -                                      |
+| `.uk-flex-initial@l`                 | -                                      |
+| `.uk-flex-initial@m`                 | -                                      |
+| `.uk-flex-initial@s`                 | -                                      |
+| `.uk-flex-initial@xl`                | -                                      |
+| `.uk-flex-inline`                    | -                                      |
+| `.uk-flex-last`                      | -                                      |
+| `.uk-flex-last@l`                    | -                                      |
+| `.uk-flex-last@m`                    | -                                      |
+| `.uk-flex-last@s`                    | -                                      |
+| `.uk-flex-last@xl`                   | -                                      |
+| `.uk-flex-left`                      | -                                      |
+| `.uk-flex-left@l`                    | -                                      |
+| `.uk-flex-left@m`                    | -                                      |
+| `.uk-flex-left@s`                    | -                                      |
+| `.uk-flex-left@xl`                   | -                                      |
+| `.uk-flex-middle`                    | -                                      |
+| `.uk-flex-middle@l`                  | -                                      |
+| `.uk-flex-middle@m`                  | -                                      |
+| `.uk-flex-middle@s`                  | -                                      |
+| `.uk-flex-middle@xl`                 | -                                      |
+| `.uk-flex-none`                      | -                                      |
+| `.uk-flex-none@l`                    | -                                      |
+| `.uk-flex-none@m`                    | -                                      |
+| `.uk-flex-none@s`                    | -                                      |
+| `.uk-flex-none@xl`                   | -                                      |
+| `.uk-flex-nowrap`                    | -                                      |
+| `.uk-flex-right`                     | -                                      |
+| `.uk-flex-right@l`                   | -                                      |
+| `.uk-flex-right@m`                   | -                                      |
+| `.uk-flex-right@s`                   | -                                      |
+| `.uk-flex-right@xl`                  | -                                      |
+| `.uk-flex-row`                       | -                                      |
+| `.uk-flex-row-reverse`               | -                                      |
+| `.uk-flex-row@l`                     | -                                      |
+| `.uk-flex-row@m`                     | -                                      |
+| `.uk-flex-row@s`                     | -                                      |
+| `.uk-flex-row@xl`                    | -                                      |
+| `.uk-flex-stretch`                   | -                                      |
+| `.uk-flex-stretch@l`                 | -                                      |
+| `.uk-flex-stretch@m`                 | -                                      |
+| `.uk-flex-stretch@s`                 | -                                      |
+| `.uk-flex-stretch@xl`                | -                                      |
+| `.uk-flex-top@l`                     | -                                      |
+| `.uk-flex-top@m`                     | -                                      |
+| `.uk-flex-top@s`                     | -                                      |
+| `.uk-flex-top@xl`                    | -                                      |
+| `.uk-flex-wrap`                      | -                                      |
+| `.uk-flex-wrap-around`               | -                                      |
+| `.uk-flex-wrap-between`              | -                                      |
+| `.uk-flex-wrap-bottom`               | -                                      |
+| `.uk-flex-wrap-middle`               | -                                      |
+| `.uk-flex-wrap-reverse`              | -                                      |
+| `.uk-flex-wrap-stretch`              | -                                      |
+| `.uk-float-left`                     | -                                      |
+| `.uk-float-right`                    | -                                      |
+| `.uk-form-custom`                    | -                                      |
+| `.uk-form-danger`                    | `.uk-form-destructive`                 |
+| `.uk-form-small`                     | -                                      |
+| `.uk-grid`                           | -                                      |
+| `.uk-grid-collapse`                  | -                                      |
+| `.uk-grid-column-collapse`           | -                                      |
+| `.uk-grid-column-large`              | -                                      |
+| `.uk-grid-column-medium`             | -                                      |
+| `.uk-grid-column-small`              | -                                      |
+| `.uk-grid-divider`                   | -                                      |
+| `.uk-grid-item-match`                | -                                      |
+| `.uk-grid-large`                     | -                                      |
+| `.uk-grid-margin`                    | -                                      |
+| `.uk-grid-margin-large`              | -                                      |
+| `.uk-grid-margin-medium`             | -                                      |
+| `.uk-grid-margin-small`              | -                                      |
+| `.uk-grid-match`                     | -                                      |
+| `.uk-grid-medium`                    | -                                      |
+| `.uk-grid-row-collapse`              | -                                      |
+| `.uk-grid-row-large`                 | -                                      |
+| `.uk-grid-row-medium`                | -                                      |
+| `.uk-grid-row-small`                 | -                                      |
+| `.uk-grid-small`                     | -                                      |
+| `.uk-grid-stack`                     | -                                      |
+| `.uk-heading-2xlarge`                | `.uk-hero-2xl`                         |
+| `.uk-heading-3xlarge`                | `.uk-hero-3xl`                         |
+| `.uk-heading-large`                  | `.uk-hero-lg`                          |
+| `.uk-heading-medium`                 | `.uk-hero-md`                          |
+| `.uk-heading-small`                  | `.uk-hero-sm`                          |
+| `.uk-heading-xlarge`                 | `.uk-hero-xl`                          |
+| `.uk-height-1-1`                     | -                                      |
+| `.uk-height-large`                   | -                                      |
+| `.uk-height-max-large`               | -                                      |
+| `.uk-height-max-medium`              | -                                      |
+| `.uk-height-max-small`               | -                                      |
+| `.uk-height-medium`                  | -                                      |
+| `.uk-height-small`                   | -                                      |
+| `.uk-height-viewport`                | -                                      |
+| `.uk-height-viewport-2`              | -                                      |
+| `.uk-height-viewport-3`              | -                                      |
+| `.uk-height-viewport-4`              | -                                      |
+| `.uk-hidden`                         | -                                      |
+| `.uk-hidden-hover`                   | -                                      |
+| `.uk-hidden-visually`                | -                                      |
+| `.uk-hidden@l`                       | -                                      |
+| `.uk-hidden@m`                       | -                                      |
+| `.uk-hidden@s`                       | -                                      |
+| `.uk-hidden@xl`                      | -                                      |
+| `.uk-icon-button`                    | -                                      |
+| `.uk-icon-button-outline`            | -                                      |
+| `.uk-icon-button-small`              | -                                      |
+| `.uk-icon-button-xsmall`             | -                                      |
+| `.uk-icon-link`                      | -                                      |
+| `.uk-iconnav`                        | -                                      |
+| `.uk-iconnav-outline`                | -                                      |
+| `.uk-iconnav-small`                  | -                                      |
+| `.uk-iconnav-vertical`               | -                                      |
+| `.uk-iconnav-xsmall`                 | -                                      |
+| `.uk-input-fake-disabled`            | -                                      |
+| `.uk-input-fake-focus`               | -                                      |
+| `.uk-invisible`                      | -                                      |
+| `.uk-invisible-hover`                | -                                      |
+| `.uk-label-danger`                   | `.uk-label-destructive`                |
+| `.uk-logo`                           | -                                      |
+| `.uk-logo-inverse`                   | -                                      |
+| `.uk-margin`                         | -                                      |
+| `.uk-margin-auto`                    | -                                      |
+| `.uk-margin-auto-bottom`             | -                                      |
+| `.uk-margin-auto-left`               | -                                      |
+| `.uk-margin-auto-left@l`             | -                                      |
+| `.uk-margin-auto-left@m`             | -                                      |
+| `.uk-margin-auto-left@s`             | -                                      |
+| `.uk-margin-auto-left@xl`            | -                                      |
+| `.uk-margin-auto-right`              | -                                      |
+| `.uk-margin-auto-right@l`            | -                                      |
+| `.uk-margin-auto-right@m`            | -                                      |
+| `.uk-margin-auto-right@s`            | -                                      |
+| `.uk-margin-auto-right@xl`           | -                                      |
+| `.uk-margin-auto-top`                | -                                      |
+| `.uk-margin-auto@l`                  | -                                      |
+| `.uk-margin-auto@m`                  | -                                      |
+| `.uk-margin-auto@s`                  | -                                      |
+| `.uk-margin-auto@xl`                 | -                                      |
+| `.uk-margin-bottom`                  | -                                      |
+| `.uk-margin-large`                   | -                                      |
+| `.uk-margin-large-bottom`            | -                                      |
+| `.uk-margin-large-left`              | -                                      |
+| `.uk-margin-large-right`             | -                                      |
+| `.uk-margin-large-top`               | -                                      |
+| `.uk-margin-left`                    | -                                      |
+| `.uk-margin-medium`                  | -                                      |
+| `.uk-margin-medium-bottom`           | -                                      |
+| `.uk-margin-medium-left`             | -                                      |
+| `.uk-margin-medium-right`            | -                                      |
+| `.uk-margin-medium-top`              | -                                      |
+| `.uk-margin-remove`                  | -                                      |
+| `.uk-margin-remove-adjacent`         | -                                      |
+| `.uk-margin-remove-bottom`           | -                                      |
+| `.uk-margin-remove-first-child`      | -                                      |
+| `.uk-margin-remove-last-child`       | -                                      |
+| `.uk-margin-remove-left`             | -                                      |
+| `.uk-margin-remove-left@l`           | -                                      |
+| `.uk-margin-remove-left@m`           | -                                      |
+| `.uk-margin-remove-left@s`           | -                                      |
+| `.uk-margin-remove-left@xl`          | -                                      |
+| `.uk-margin-remove-right`            | -                                      |
+| `.uk-margin-remove-right@l`          | -                                      |
+| `.uk-margin-remove-right@m`          | -                                      |
+| `.uk-margin-remove-right@s`          | -                                      |
+| `.uk-margin-remove-right@xl`         | -                                      |
+| `.uk-margin-remove-top`              | -                                      |
+| `.uk-margin-remove-vertical`         | -                                      |
+| `.uk-margin-right`                   | -                                      |
+| `.uk-margin-small`                   | -                                      |
+| `.uk-margin-small-bottom`            | -                                      |
+| `.uk-margin-small-left`              | -                                      |
+| `.uk-margin-small-right`             | -                                      |
+| `.uk-margin-small-top`               | -                                      |
+| `.uk-margin-top`                     | -                                      |
+| `.uk-margin-xlarge`                  | -                                      |
+| `.uk-margin-xlarge-bottom`           | -                                      |
+| `.uk-margin-xlarge-left`             | -                                      |
+| `.uk-margin-xlarge-right`            | -                                      |
+| `.uk-margin-xlarge-top`              | -                                      |
+| `.uk-margin-xsmall`                  | -                                      |
+| `.uk-margin-xsmall-bottom`           | -                                      |
+| `.uk-margin-xsmall-left`             | -                                      |
+| `.uk-margin-xsmall-right`            | -                                      |
+| `.uk-margin-xsmall-top`              | -                                      |
+| `.uk-marker`                         | -                                      |
+| `.uk-nav-subtitle`                   | -                                      |
+| `.uk-navbar`                         | -                                      |
+| `.uk-navbar-center`                  | -                                      |
+| `.uk-navbar-center-left`             | -                                      |
+| `.uk-navbar-center-right`            | -                                      |
+| `.uk-navbar-container`               | -                                      |
+| `.uk-navbar-dropdown`                | -                                      |
+| `.uk-navbar-dropdown-dropbar`        | -                                      |
+| `.uk-navbar-dropdown-nav`            | -                                      |
+| `.uk-navbar-dropdown-width-2`        | -                                      |
+| `.uk-navbar-dropdown-width-3`        | -                                      |
+| `.uk-navbar-dropdown-width-4`        | -                                      |
+| `.uk-navbar-dropdown-width-5`        | -                                      |
+| `.uk-navbar-item`                    | -                                      |
+| `.uk-navbar-justify`                 | -                                      |
+| `.uk-navbar-left`                    | -                                      |
+| `.uk-navbar-nav`                     | -                                      |
+| `.uk-navbar-parent-icon`             | -                                      |
+| `.uk-navbar-right`                   | -                                      |
+| `.uk-navbar-subtitle`                | -                                      |
+| `.uk-navbar-toggle`                  | -                                      |
+| `.uk-navbar-toggle-icon`             | -                                      |
+| `.uk-navbar-transparent`             | -                                      |
+| `.uk-notification-message-danger`    | `.uk-notification-message-destructive` |
+| `.uk-object-bottom-center`           | -                                      |
+| `.uk-object-bottom-left`             | -                                      |
+| `.uk-object-bottom-right`            | -                                      |
+| `.uk-object-center-center`           | -                                      |
+| `.uk-object-center-left`             | -                                      |
+| `.uk-object-center-right`            | -                                      |
+| `.uk-object-contain`                 | -                                      |
+| `.uk-object-cover`                   | -                                      |
+| `.uk-object-fill`                    | -                                      |
+| `.uk-object-none`                    | -                                      |
+| `.uk-object-scale-down`              | -                                      |
+| `.uk-object-top-center`              | -                                      |
+| `.uk-object-top-left`                | -                                      |
+| `.uk-object-top-right`               | -                                      |
+| `.uk-overlay`                        | -                                      |
+| `.uk-overlay-default`                | -                                      |
+| `.uk-overlay-primary`                | -                                      |
+| `.uk-padding`                        | -                                      |
+| `.uk-padding-bottom`                 | -                                      |
+| `.uk-padding-large`                  | -                                      |
+| `.uk-padding-large-bottom`           | -                                      |
+| `.uk-padding-large-left`             | -                                      |
+| `.uk-padding-large-right`            | -                                      |
+| `.uk-padding-large-top`              | -                                      |
+| `.uk-padding-left`                   | -                                      |
+| `.uk-padding-medium`                 | -                                      |
+| `.uk-padding-medium-bottom`          | -                                      |
+| `.uk-padding-medium-left`            | -                                      |
+| `.uk-padding-medium-right`           | -                                      |
+| `.uk-padding-medium-top`             | -                                      |
+| `.uk-padding-remove`                 | -                                      |
+| `.uk-padding-remove-bottom`          | -                                      |
+| `.uk-padding-remove-horizontal`      | -                                      |
+| `.uk-padding-remove-left`            | -                                      |
+| `.uk-padding-remove-right`           | -                                      |
+| `.uk-padding-remove-top`             | -                                      |
+| `.uk-padding-remove-vertical`        | -                                      |
+| `.uk-padding-right`                  | -                                      |
+| `.uk-padding-small`                  | -                                      |
+| `.uk-padding-small-bottom`           | -                                      |
+| `.uk-padding-small-left`             | -                                      |
+| `.uk-padding-small-right`            | -                                      |
+| `.uk-padding-small-top`              | -                                      |
+| `.uk-padding-top`                    | -                                      |
+| `.uk-padding-xlarge`                 | -                                      |
+| `.uk-padding-xlarge-bottom`          | -                                      |
+| `.uk-padding-xlarge-left`            | -                                      |
+| `.uk-padding-xlarge-right`           | -                                      |
+| `.uk-padding-xlarge-top`             | -                                      |
+| `.uk-padding-xsmall`                 | -                                      |
+| `.uk-padding-xsmall-bottom`          | -                                      |
+| `.uk-padding-xsmall-left`            | -                                      |
+| `.uk-padding-xsmall-right`           | -                                      |
+| `.uk-padding-xsmall-top`             | -                                      |
+| `.uk-pagination`                     | -                                      |
+| `.uk-panel`                          | -                                      |
+| `.uk-panel-scrollable`               | -                                      |
+| `.uk-position-large`                 | `.uk-position-lg`                      |
+| `.uk-position-medium`                | `.uk-position-md`                      |
+| `.uk-position-small`                 | `.uk-position-sm`                      |
+| `.uk-position-xlarge`                | `.uk-position-xl`                      |
+| `.uk-position-xsmall`                | `.uk-position-xs`                      |
+| `.uk-search`                         | -                                      |
+| `.uk-search-default`                 | -                                      |
+| `.uk-search-icon`                    | -                                      |
+| `.uk-search-icon-flip`               | -                                      |
+| `.uk-search-input`                   | -                                      |
+| `.uk-search-large`                   | -                                      |
+| `.uk-search-navbar`                  | -                                      |
+| `.uk-section`                        | -                                      |
+| `.uk-section-default`                | -                                      |
+| `.uk-section-large`                  | -                                      |
+| `.uk-section-muted`                  | -                                      |
+| `.uk-section-primary`                | -                                      |
+| `.uk-section-secondary`              | -                                      |
+| `.uk-section-small`                  | -                                      |
+| `.uk-section-xlarge`                 | -                                      |
+| `.uk-section-xsmall`                 | -                                      |
+| `.uk-slidenav-large`                 | `.uk-slidenav-lg`                      |
+| `.uk-slider-container-offset`        | -                                      |
+| `.uk-subnav-danger`                  | `.uk-subnav-destructive`               |
+| `.uk-table-large`                    | `.uk-table-lg`                         |
+| `.uk-table-small`                    | `.uk-table-sm`                         |
+| `.uk-tag-danger`                     | `.uk-tag-destructive`                  |
+| `.uk-text-baseline`                  | -                                      |
+| `.uk-text-bold`                      | -                                      |
+| `.uk-text-bolder`                    | -                                      |
+| `.uk-text-bottom`                    | -                                      |
+| `.uk-text-capitalize`                | -                                      |
+| `.uk-text-center@l`                  | -                                      |
+| `.uk-text-center@m`                  | -                                      |
+| `.uk-text-center@s`                  | -                                      |
+| `.uk-text-center@xl`                 | -                                      |
+| `.uk-text-danger`                    | `.uk-text-destructive`                 |
+| `.uk-text-decoration-none`           | -                                      |
+| `.uk-text-default`                   | -                                      |
+| `.uk-text-italic`                    | -                                      |
+| `.uk-text-justify`                   | -                                      |
+| `.uk-text-large`                     | -                                      |
+| `.uk-text-left`                      | -                                      |
+| `.uk-text-left@l`                    | -                                      |
+| `.uk-text-left@m`                    | -                                      |
+| `.uk-text-left@s`                    | -                                      |
+| `.uk-text-left@xl`                   | -                                      |
+| `.uk-text-light`                     | -                                      |
+| `.uk-text-lighter`                   | -                                      |
+| `.uk-text-lowercase`                 | -                                      |
+| `.uk-text-middle`                    | -                                      |
+| `.uk-text-muted`                     | -                                      |
+| `.uk-text-normal`                    | -                                      |
+| `.uk-text-nowrap`                    | -                                      |
+| `.uk-text-right@l`                   | -                                      |
+| `.uk-text-right@m`                   | -                                      |
+| `.uk-text-right@s`                   | -                                      |
+| `.uk-text-right@xl`                  | -                                      |
+| `.uk-text-small`                     | -                                      |
+| `.uk-text-top`                       | -                                      |
+| `.uk-text-uppercase`                 | -                                      |
+| `.uk-theme-switcher`                 | `.uk-ts`                               |
+| `.uk-theme-switcher-options`         | `.uk-ts-value`                         |
+| `.uk-tile`                           | -                                      |
+| `.uk-tile-default`                   | -                                      |
+| `.uk-tile-large`                     | -                                      |
+| `.uk-tile-muted`                     | -                                      |
+| `.uk-tile-primary`                   | -                                      |
+| `.uk-tile-secondary`                 | -                                      |
+| `.uk-tile-small`                     | -                                      |
+| `.uk-tile-xlarge`                    | -                                      |
+| `.uk-tile-xsmall`                    | -                                      |
+| `.uk-toggle-switch-danger`           | `.uk-toggle-switch-destructive`        |
+| `.uk-totop`                          | -                                      |
+| `.uk-transition-slide-bottom-medium` | `.uk-transition-slide-bottom-md`       |
+| `.uk-transition-slide-bottom-small`  | `.uk-transition-slide-bottom-sm`       |
+| `.uk-transition-slide-left-medium`   | `.uk-transition-slide-left-md`         |
+| `.uk-transition-slide-left-small`    | `.uk-transition-slide-left-sm`         |
+| `.uk-transition-slide-right-medium`  | `.uk-transition-slide-right-md`        |
+| `.uk-transition-slide-right-small`   | `.uk-transition-slide-right-sm`        |
+| `.uk-transition-slide-top-medium`    | `.uk-transition-slide-top-md`          |
+| `.uk-transition-slide-top-small`     | `.uk-transition-slide-top-sm`          |
+| `.uk-visible-toggle`                 | -                                      |
+| `.uk-visible@l`                      | -                                      |
+| `.uk-visible@m`                      | -                                      |
+| `.uk-visible@s`                      | -                                      |
+| `.uk-visible@xl`                     | -                                      |
+| `.uk-width-1-1@l`                    | -                                      |
+| `.uk-width-1-1@m`                    | -                                      |
+| `.uk-width-1-1@s`                    | -                                      |
+| `.uk-width-1-1@xl`                   | -                                      |
+| `.uk-width-1-2`                      | -                                      |
+| `.uk-width-1-2@l`                    | -                                      |
+| `.uk-width-1-2@m`                    | -                                      |
+| `.uk-width-1-2@s`                    | -                                      |
+| `.uk-width-1-2@xl`                   | -                                      |
+| `.uk-width-1-3`                      | -                                      |
+| `.uk-width-1-3@l`                    | -                                      |
+| `.uk-width-1-3@m`                    | -                                      |
+| `.uk-width-1-3@s`                    | -                                      |
+| `.uk-width-1-3@xl`                   | -                                      |
+| `.uk-width-1-4`                      | -                                      |
+| `.uk-width-1-4@l`                    | -                                      |
+| `.uk-width-1-4@m`                    | -                                      |
+| `.uk-width-1-4@s`                    | -                                      |
+| `.uk-width-1-4@xl`                   | -                                      |
+| `.uk-width-1-5`                      | -                                      |
+| `.uk-width-1-5@l`                    | -                                      |
+| `.uk-width-1-5@m`                    | -                                      |
+| `.uk-width-1-5@s`                    | -                                      |
+| `.uk-width-1-5@xl`                   | -                                      |
+| `.uk-width-1-6`                      | -                                      |
+| `.uk-width-1-6@l`                    | -                                      |
+| `.uk-width-1-6@m`                    | -                                      |
+| `.uk-width-1-6@s`                    | -                                      |
+| `.uk-width-1-6@xl`                   | -                                      |
+| `.uk-width-2-3`                      | -                                      |
+| `.uk-width-2-3@l`                    | -                                      |
+| `.uk-width-2-3@m`                    | -                                      |
+| `.uk-width-2-3@s`                    | -                                      |
+| `.uk-width-2-3@xl`                   | -                                      |
+| `.uk-width-2-5`                      | -                                      |
+| `.uk-width-2-5@l`                    | -                                      |
+| `.uk-width-2-5@m`                    | -                                      |
+| `.uk-width-2-5@s`                    | -                                      |
+| `.uk-width-2-5@xl`                   | -                                      |
+| `.uk-width-2xlarge`                  | -                                      |
+| `.uk-width-2xlarge@l`                | -                                      |
+| `.uk-width-2xlarge@m`                | -                                      |
+| `.uk-width-2xlarge@s`                | -                                      |
+| `.uk-width-2xlarge@xl`               | -                                      |
+| `.uk-width-3-4`                      | -                                      |
+| `.uk-width-3-4@l`                    | -                                      |
+| `.uk-width-3-4@m`                    | -                                      |
+| `.uk-width-3-4@s`                    | -                                      |
+| `.uk-width-3-4@xl`                   | -                                      |
+| `.uk-width-3-5`                      | -                                      |
+| `.uk-width-3-5@l`                    | -                                      |
+| `.uk-width-3-5@m`                    | -                                      |
+| `.uk-width-3-5@s`                    | -                                      |
+| `.uk-width-3-5@xl`                   | -                                      |
+| `.uk-width-4-5`                      | -                                      |
+| `.uk-width-4-5@l`                    | -                                      |
+| `.uk-width-4-5@m`                    | -                                      |
+| `.uk-width-4-5@s`                    | -                                      |
+| `.uk-width-4-5@xl`                   | -                                      |
+| `.uk-width-5-6`                      | -                                      |
+| `.uk-width-5-6@l`                    | -                                      |
+| `.uk-width-5-6@m`                    | -                                      |
+| `.uk-width-5-6@s`                    | -                                      |
+| `.uk-width-5-6@xl`                   | -                                      |
+| `.uk-width-auto`                     | -                                      |
+| `.uk-width-auto@l`                   | -                                      |
+| `.uk-width-auto@m`                   | -                                      |
+| `.uk-width-auto@s`                   | -                                      |
+| `.uk-width-auto@xl`                  | -                                      |
+| `.uk-width-expand`                   | -                                      |
+| `.uk-width-expand@l`                 | -                                      |
+| `.uk-width-expand@m`                 | -                                      |
+| `.uk-width-expand@s`                 | -                                      |
+| `.uk-width-expand@xl`                | -                                      |
+| `.uk-width-large`                    | -                                      |
+| `.uk-width-large@l`                  | -                                      |
+| `.uk-width-large@m`                  | -                                      |
+| `.uk-width-large@s`                  | -                                      |
+| `.uk-width-large@xl`                 | -                                      |
+| `.uk-width-max-content`              | -                                      |
+| `.uk-width-medium`                   | -                                      |
+| `.uk-width-medium@l`                 | -                                      |
+| `.uk-width-medium@m`                 | -                                      |
+| `.uk-width-medium@s`                 | -                                      |
+| `.uk-width-medium@xl`                | -                                      |
+| `.uk-width-min-content`              | -                                      |
+| `.uk-width-small`                    | -                                      |
+| `.uk-width-small@l`                  | -                                      |
+| `.uk-width-small@m`                  | -                                      |
+| `.uk-width-small@s`                  | -                                      |
+| `.uk-width-small@xl`                 | -                                      |
+| `.uk-width-xlarge`                   | -                                      |
+| `.uk-width-xlarge@l`                 | -                                      |
+| `.uk-width-xlarge@m`                 | -                                      |
+| `.uk-width-xlarge@s`                 | -                                      |
+| `.uk-width-xlarge@xl`                | -                                      |

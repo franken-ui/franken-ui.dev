@@ -4,6 +4,12 @@
     "baseUrl": ".",
     "paths": {
       "css/*": ["src/css/*"],
+      "layouts/*": ["src/layouts/*"],
+      "snippets/*": ["src/snippets/*"],
+      "components/*": ["src/components/*"],
+      "data/*": ["src/data/*"],
+      "helpers/*": ["src/helpers/*"],
     }
-  }
+  },
+  "exclude": ["dist", "public"]
 }

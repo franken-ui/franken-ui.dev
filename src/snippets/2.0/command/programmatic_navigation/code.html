@@ -1,0 +1,36 @@
+<button
+  class="uk-btn uk-btn-default"
+  type="button"
+  data-uk-toggle="target: #programmatic_navigation"
+>
+  Open
+</button>
+
+<uk-command id="cmd-demo" toggle="programmatic_navigation">
+  <select hidden>
+    <optgroup label="Suggestions">
+      <option data-icon="calendar" value="/path/to/calendar">Calendar</option>
+      <option data-icon="smile" value="/path/to/search-emoji">
+        Search Emoji
+      </option>
+      <option data-icon="calculator" disabled value="/path/to/calculator">
+        Calculator
+      </option>
+    </optgroup>
+    <optgroup label="Settings">
+      <option data-icon="user" value="/path/to/profile">Profile</option>
+      <option data-icon="credit-card" value="/path/to/billing">Billing</option>
+      <option data-icon="settings" value="/path/to/settings">Settings</option>
+    </optgroup>
+  </select>
+</uk-command>
+
+<script>
+  const el = document.getElementById("cmd-demo");
+
+  el?.addEventListener("uk-command:click", (e) => {
+    console.log(e.detail.value.value);
+
+    // location.href = e.detail.value.value;
+  });
+</script>

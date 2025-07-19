@@ -1,0 +1,105 @@
+---
+import WizardTab from "components/wizard_tab.astro";
+import Ec from "snippets/ec.astro";
+---
+
+<div class="mt-10">
+  <WizardTab />
+
+  <ul class="wizard uk-switcher mt-2">
+    <li class="uk-active">
+      <div class="mt-10"></div>
+
+      <p class="uk-paragraph">
+        <strong>1.</strong> Start by going to <a
+          class="uk-link"
+          href="https://ui.shadcn.com/colors"
+          target="_blank">https://ui.shadcn.com/colors</a
+        >. Set the output format to <strong>HSL</strong> and pick your desired color.
+        Use that color to assign values to the <code class="uk-codespan"
+          >--primary</code
+        >, <code class="uk-codespan">--primary-foreground</code>, and <code
+          class="uk-codespan">--ring</code
+        > tokens. These tokens represent your main theme color, its contrasting foreground
+        color, and the ring color for focus states.
+      </p>
+
+      <p class="uk-paragraph">
+        <strong>2.</strong> Use the CSS snippet below as your starting point and
+        replace the <code class="uk-codespan">*</code> with your theme name (e.g.
+        <code class="uk-codespan">indigo</code>, <code class="uk-codespan"
+          >cyan</code
+        >, <code class="uk-codespan">fuchsia</code>, etc.). You only need to
+        update the values for <code class="uk-codespan">--primary</code>, <code
+          class="uk-codespan">--primary-foreground</code
+        >, and <code class="uk-codespan">--ring</code> for both light and dark modes,
+        but you're free to customize everything else if needed.
+      </p>
+
+      <Ec version="2.1" path="theming.23" />
+
+      <p class="uk-paragraph">
+        <span class="uk-label uk-label-primary">Note</span> CDN theming only provides
+        basic theming and won't customize checkboxes, radio buttons, or any other
+        SVG-based background images, as colors need to be converted and injected
+        (i.e., compiled). For advanced customization, please use the Vite plugin.
+      </p>
+    </li>
+    <li>
+      <div class="mt-10"></div>
+
+      <p class="uk-paragraph">
+        To create your own palette, follow these steps:
+      </p>
+
+      <p class="uk-paragraph">
+        <strong>1.</strong> Start by going to <a
+          class="uk-link"
+          href="https://ui.shadcn.com/colors"
+          target="_blank">https://ui.shadcn.com/colors</a
+        >. Set the output format to <strong>HSL</strong> and pick your desired color.
+        Use that color to assign values to the <code class="uk-codespan"
+          >--primary</code
+        >, <code class="uk-codespan">--primary-foreground</code>, and <code
+          class="uk-codespan">--ring</code
+        > tokens. These tokens represent your main theme color, its contrasting foreground
+        color, and the ring color for focus states.
+      </p>
+
+      <p class="uk-paragraph">
+        <strong>2.</strong> Use the snippet below as your starting point and replace
+        the <code class="uk-codespan">*</code> with your theme name (e.g. <code
+          class="uk-codespan">indigo</code
+        >, <code class="uk-codespan">cyan</code>, <code class="uk-codespan"
+          >fuchsia</code
+        >, etc.). You only need to update the values for <code
+          class="uk-codespan">--primary</code
+        >, <code class="uk-codespan">--primary-foreground</code>, and <code
+          class="uk-codespan">--ring</code
+        > for both light and dark modes, but you're free to customize everything
+        else if needed.
+      </p>
+
+      <Ec version="2.1" path="theming.17" />
+
+      <p class="uk-paragraph">
+        <span class="uk-label uk-label-primary">Note</span> If you're using the legacy
+        color generators from version 2.0, make sure to include the following additional
+        keys in <strong>dark mode</strong> for compatibility:
+      </p>
+
+      <Ec version="2.1" path="theming.18" />
+
+      <p class="uk-paragraph">
+        <strong>3.</strong> Finally, configure your <code class="uk-codespan"
+          >vite.config.js</code
+        > to add the custom palette. You will do this inside the <code
+          class="uk-codespan">customPalette</code
+        >
+        option.
+      </p>
+
+      <Ec version="2.1" path="theming.20" />
+    </li>
+  </ul>
+</div>

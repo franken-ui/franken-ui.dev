@@ -1,0 +1,78 @@
+---
+import { readFileSync } from "fs";
+import { resolve } from "path";
+
+const { version = "2.0", component } = Astro.props;
+
+const id = `hx-${component.replace(".", "-")}`;
+const route = `/hx/ec/${version}/${component.replace(".", "/")}`;
+
+let lines = 0;
+
+const path = resolve(
+  "src",
+  "snippets",
+  version,
+  `${component.replace(".", "/")}/code.html`,
+);
+
+try {
+  const fileContent = readFileSync(path, "utf-8");
+
+  lines = fileContent.trim().split("\n").length || 1;
+} catch (error) {
+  console.error(`Error reading file from ${path}:`, error);
+}
+---
+
+<div class="snippet mt-10">
+  <ul class="uk-tab" data-uk-tab="swiping: false">
+    <li class="uk-active">
+      <a href="#" style="--uk-tab-item-padding: 0.5rem 1rem 0.75rem 1rem"
+        >Preview</a
+      >
+    </li>
+    <li>
+      <a href="#" style="--uk-tab-item-padding: 0.5rem 1rem 0.75rem 1rem"
+        >Markup</a
+      >
+    </li>
+  </ul>
+  <ul class="uk-switcher mt-4">
+    <li class="uk-active">
+      <div class="preview">
+        <div class="flex justify-center" id={id}>
+          <button
+            class="uk-btn uk-btn-default"
+            hx-get={`${route}/preview`}
+            hx-target={`#${id}`}
+            hx-swap="outerHTML"
+          >
+            Show
+          </button>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="ec">
+        <div
+          class="bg-muted animate-pulse"
+          hx-trigger="intersect"
+          hx-get={`${route}/markup`}
+          hx-select="figure"
+          hx-swap="outerHTML"
+          style={`height: calc(calc(var(--ec-codeLineHt) * ${lines}) + calc(var(--ec-codePadBlk) * 2) + calc(var(--ec-brdWd) * 2))`}
+        >
+        </div>
+      </div>
+    </li>
+  </ul>
+  <a
+    class="copy"
+    role="button"
+    x-data
+    x-on:click={`copyPreview('${route}/clipboard')`}
+  >
+    <uk-icon icon="clipboard-list"></uk-icon>
+  </a>
+</div>

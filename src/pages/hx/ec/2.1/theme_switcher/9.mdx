@@ -1,0 +1,33 @@
+export const partial = true;
+
+```html
+<uk-theme-switcher>
+  <select hidden>
+    <optgroup data-key="theme" label="Theme">
+      <!-- ... -->
+    </optgroup>
+    <optgroup data-key="radii" label="Radii">
+      <!-- ... -->
+    </optgroup>
+    <optgroup data-key="shadows" label="Shadows">
+      <!-- ... -->
+    </optgroup>
+    <optgroup data-key="mode" label="Mode">
+      <!-- ... -->
+    </optgroup>
+    <optgroup data-key="chart" label="Chart">
+      <option value="uk-chart-default" selected>
+        Default
+      </option>
+      <option data-hex="#e76e50" value="uk-chart-palette">
+        Palette
+      </option>
+      <option data-hex="#2563eb" value="uk-chart-sapphire">Sapphire</option>
+      <option data-hex="#e21d48" value="uk-chart-ruby">Ruby</option>
+      <option data-hex="#1dc355" value="uk-chart-emerald">Emerald</option>
+      <option data-hex="#ad7c48" value="uk-chart-daylight">Daylight</option>
+      <option data-hex="#959593" value="uk-chart-midnight">Midnight</option>
+    </optgroup>
+  </select>
+</uk-theme-switcher>
+```

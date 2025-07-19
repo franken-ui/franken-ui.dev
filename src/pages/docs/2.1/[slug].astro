@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Docs from "layouts/docs/2.1.astro";
+
+export const getStaticPaths = (async () => {
+  const twodotone = await getCollection("2.1");
+
+  return twodotone.map((entry) => ({
+    params: { slug: entry.id },
+    props: { id: entry.id },
+  }));
+}) satisfies GetStaticPaths;
+
+const { id } = Astro.props;
+---
+
+<Docs version="2.1" id={id} />

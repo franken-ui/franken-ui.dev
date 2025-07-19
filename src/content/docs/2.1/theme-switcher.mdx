@@ -1,0 +1,116 @@
+---
+group: components
+text: Theme Switcher
+title: Theme Switcher
+lead: Easily switch between themes, light or dark mode and more with the Theme Switcher component.
+meta:
+  description: Easily switch between themes, light or dark mode and more with the Theme Switcher component.
+keywords: "dark"
+webc: true
+---
+
+import Ec from "snippets/ec.astro";
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+To implement the Theme Switcher, you'll need to make some modifications to your HTML code to allow users to change their preferences.
+
+**1.** Start by setting a default theme and mode in the `<head>` tag of your HTML by checking the user's preference:
+
+<Ec version="2.1" path="theme_switcher.1" />
+
+This will first check if a user previously set the theme color preference manually using local storage, and as a fallback, it will either set dark or light mode based on the browser's color scheme preference.
+
+<span class="uk-label uk-label-primary">Note</span> You can replace
+`uk-theme-neutral` with any of the 15 available themes you want as the default.
+
+**2\.** Ensure that your `<body>` tag includes the classes `bg-background` and `text-foreground` to apply the proper background and text colors that automatically adapt to the currently set theme.
+
+<Ec path="theme_switcher.2" />
+
+**3\.** You can now use the `<uk-theme-switcher>` markup in your HTML code with one `<select hidden></select>` tag as items reference and place it however you like.
+
+<Snippet version="2.1" component="theme_switcher.basic" />
+
+## Custom palette
+
+First, ensure that your `vite.config.js` file is configured to include your custom palette. For more information on how to do this, please refer to the [documentation](/docs/2.1/theming#custom-palette).
+
+## Adding or removing themes
+
+To add or remove theme options, simply add or remove `<option>` tags within the `<optgroup data-key="theme" label="Theme">` group. Each theme option should follow the format:
+
+<Ec path="theme_switcher.3" />
+
+Where:
+
+- The `data-hex` specifies the hex code for the theme preview.
+- The `value` specifies the class name for the theme.
+- The option text specifies the label for the theme.
+
+## Radii
+
+To allow users to customize radii, add an `<optgroup data-key="radii" label="Radii">` group within the `<select hidden>` tag. This group should contain `<option>` tags for each radii option, such as:
+
+<Ec path="theme_switcher.4" />
+
+## Shadows
+
+Similarly, to allow users to customize shadows, add an `<optgroup data-key="shadows" label="Shadows">` group within the `<select hidden>` tag. This group should contain `<option>` tags for each shadow option, such as:
+
+<Ec path="theme_switcher.5" />
+
+## Font
+
+You can also allow users to customize font size, just add an `<optgroup data-key="font" label="Font">` group within the `<select hidden>` tag. This group should contain `<option>` tags for each font option, such as:
+
+<Ec path="theme_switcher.6" />
+
+## Modes
+
+To allow users to switch between light and dark modes, add an `<optgroup data-key="mode" label="Mode">` group within the `<select hidden>` tag. This group should contain `<option>` tags for each mode option, such as:
+
+<Ec path="theme_switcher.8" />
+
+## Charts
+
+To allow users to switch between chart themes, add an `<optgroup data-key="chart" label="Chart">` group within the `<select hidden>` tag. This group should contain `<option>` tags for each chart theme option, such as:
+
+<Ec version="2.1" path="theme_switcher.9" />
+
+<span class="uk-label uk-label-primary">Note</span> The values inside the `<option>` tags will be attached to the `<head>` tag, allowing for customization. However, the dark and light classes are exceptions and will be handled differently.
+
+## Dropdown
+
+You can use the [Drop](/docs/2.1/drop) component to display the Theme Switcher, providing a compact and convenient way to access theme options.
+
+<Snippet version="2.1" component="theme_switcher.drop" />
+
+## Modal
+
+Alternatively, you can also display the Theme Switcher inside a [Modal](/docs/2.1/modal) component.
+
+<Snippet version="2.1" component="theme_switcher.modal" />
+
+## Internationalization
+
+To customize language, you can now directly do it inside your markup. This allows for more flexibility and control over the text displayed to your users.
+
+<Snippet version="2.1" component="theme_switcher.i18n" />
+
+## Attributes
+
+The following attributes are available for this component:
+
+| Name                     | Type    | Default | Description                                |
+| ------------------------ | ------- | ------- | ------------------------------------------ |
+| `force-prevent-rerender` | Boolean | false   | Forcefully prevents component rerendering. |
+
+## Events
+
+The Theme Switcher component triggers the following events on elements with this component attached:
+
+| Name                       | Description                       |
+| -------------------------- | --------------------------------- |
+| `uk-theme-switcher:change` | Fired when something has changed. |

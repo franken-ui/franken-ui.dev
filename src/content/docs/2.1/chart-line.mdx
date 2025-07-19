@@ -1,0 +1,35 @@
+---
+group: components
+hidden: true
+alias: chart-introduction
+text: Line Chart
+title: Line Chart
+lead: A line chart visually displays data points connected by straight lines, illustrating trends or relationships over a continuous axis.
+tbc: false
+breadcrumb:
+  - text: "Chart"
+    id: "chart-introduction"
+  - text: "Line Chart"
+    id: "chart-line"
+---
+
+import Snippet from "snippets/component.astro";
+import chart from "franken-ui/js/chart.iife?url";
+
+## Smooth
+
+<Snippet component="charts_line.smooth" />
+
+## Straight
+
+<Snippet component="charts_line.straight" />
+
+## Stepline
+
+<Snippet component="charts_line.stepline" />
+
+## Multiple
+
+<Snippet component="charts_line.multiple" />
+
+<script is:inline src={chart} type="module" />

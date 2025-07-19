@@ -1,0 +1,173 @@
+---
+import "css/latest.css";
+import "css/ec.css";
+import "franken-ui/css/franken-ui.css";
+import core from "franken-ui/js/core.iife?url";
+import icon from "franken-ui/js/icon.iife?url";
+
+const { doc, cls = "" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{doc.title}</title>
+    <link
+      rel="preload"
+      href="/fonts/geist-font/fonts/GeistVariableVF.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/geist-font/fonts/GeistMonoVariableVF.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/fonts/geist-font/style.css" />
+
+    <script is:inline>
+      const htmlElement = document.documentElement;
+
+      const __FRANKEN__ = JSON.parse(
+        localStorage.getItem("__FRANKEN__") || "{}",
+      );
+
+      if (
+        __FRANKEN__.mode === "dark" ||
+        (!__FRANKEN__.mode &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        htmlElement.classList.add("dark");
+        htmlElement.dataset.theme = "github-dark";
+      } else {
+        htmlElement.classList.remove("dark");
+        htmlElement.dataset.theme = "github-light";
+      }
+
+      htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-neutral");
+      htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
+      htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
+      htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
+      htmlElement.classList.add(__FRANKEN__.chart || "uk-chart-default");
+    </script>
+
+    {
+      doc.meta &&
+        Object.keys(doc.meta).map((key) => (
+          <meta name={key} content={doc.meta[key]} />
+        ))
+    }
+
+    <link rel="shortcut icon" href="/images/monster.svg" />
+    <link rel="icon" href="/images/monster.svg" />
+    <link rel="apple-touch-icon" href="/images/monster.svg" />
+
+    <script is:inline src={core} type="module"></script>
+
+    <script
+      is:inline
+      defer
+      src="https://a.trackmaster.ovh/script.js"
+      data-website-id="e5904e04-aea5-4751-b0eb-f76ff41713d0"></script>
+  </head>
+  <body
+    class={`bg-background font-geist-sans text-foreground antialiased ${cls}`}
+  >
+    <slot />
+
+    <div
+      class="uk-offcanvas"
+      data-uk-offcanvas="flip: true; overlay: true"
+      id="theme"
+      style="--uk-offcanvas-bar-width: 320px; --uk-offcanvas-bar-width-i: -320px;"
+    >
+      <div class="uk-offcanvas-bar p-4">
+        <div class="mb-4 flex justify-center">
+          <button class="uk-btn uk-btn-secondary uk-btn-xs uk-offcanvas-close">
+            <span class="mr-2">Close</span>
+            <uk-icon icon="arrow-right"></uk-icon>
+          </button>
+        </div>
+
+        <div class="uk-h3">Customize</div>
+        <p class="text-muted-foreground mb-4 mt-1 text-sm">
+          Customize your Franken UI experience.
+        </p>
+        <uk-theme-switcher id="theme-switcher">
+          <select hidden>
+            <optgroup data-key="theme" label="Theme">
+              <option data-hex="#52525b" value="uk-theme-zinc">Zinc</option>
+              <option data-hex="#64748b" value="uk-theme-slate">Slate</option>
+              <option data-hex="#78716c" value="uk-theme-stone">Stone</option>
+              <option data-hex="#6b7280" value="uk-theme-gray">Gray</option>
+              <option data-hex="#737373" value="uk-theme-neutral" selected
+                >Neutral</option
+              >
+              <option data-hex="#dc2626" value="uk-theme-red">Red</option>
+              <option data-hex="#e11d48" value="uk-theme-rose">Rose</option>
+              <option data-hex="#f97316" value="uk-theme-orange">Orange</option>
+              <option data-hex="#65a30d" value="uk-theme-green">Green</option>
+              <option data-hex="#2563eb" value="uk-theme-blue">Blue</option>
+              <option data-hex="#facc15" value="uk-theme-yellow">Yellow</option>
+              <option data-hex="#7c3aed" value="uk-theme-violet">Violet</option>
+              <option data-hex="#d97706" value="uk-theme-amber">Amber</option>
+              <option data-hex="#9333ea" value="uk-theme-purple">Purple</option>
+              <option data-hex="#0d9488" value="uk-theme-teal">Teal</option>
+            </optgroup>
+            <optgroup data-key="radii" label="Radii">
+              <option value="uk-radii-none">None</option>
+              <option value="uk-radii-sm">Small</option>
+              <option value="uk-radii-md" selected>Medium</option>
+              <option value="uk-radii-lg">Large</option>
+            </optgroup>
+            <optgroup data-key="shadows" label="Shadows">
+              <option value="uk-shadows-none">None</option>
+              <option value="uk-shadows-sm" selected>Small</option>
+              <option value="uk-shadows-md">Medium</option>
+              <option value="uk-shadows-lg">Large</option>
+            </optgroup>
+            <optgroup data-key="font" label="Font">
+              <option value="uk-font-sm" selected>Small</option>
+              <option value="uk-font-base">Default</option>
+            </optgroup>
+            <optgroup data-key="chart" label="Chart">
+              <option value="uk-chart-default" selected>Default</option>
+              <option data-hex="#e76e50" value="uk-chart-palette"
+                >Palette</option
+              >
+              <option data-hex="#2563eb" value="uk-chart-sapphire"
+                >Sapphire</option
+              >
+              <option data-hex="#e21d48" value="uk-chart-ruby">Ruby</option>
+              <option data-hex="#1dc355" value="uk-chart-emerald"
+                >Emerald</option
+              >
+              <option data-hex="#ad7c48" value="uk-chart-daylight"
+                >Daylight</option
+              >
+              <option data-hex="#959593" value="uk-chart-midnight"
+                >Midnight</option
+              >
+            </optgroup>
+            <optgroup data-key="mode" label="Mode">
+              <option data-icon="sun" value="light">Light</option>
+              <option data-icon="moon" value="dark">Dark</option>
+            </optgroup>
+          </select>
+        </uk-theme-switcher>
+      </div>
+    </div>
+
+    <script is:inline src={icon} type="module"></script>
+    <script is:inline src="/js/resizer.iife.js" type="module"></script>
+    <script is:inline src="/js/htmx@2.0.6/htmx.min.js"></script>
+    <script is:inline src="/js/alpinejs@3.14.9/alpinejs.min.js"></script>
+  </body>
+</html>

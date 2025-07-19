@@ -1,0 +1,67 @@
+---
+group: components
+text: Cover
+title: Cover
+lead: Expand images, videos or iframes to cover their entire container and place your own content on top.
+meta:
+  description: Expand images, videos or iframes to cover their entire container and place your own content on top.
+---
+import Ec from 'snippets/ec.astro';
+
+
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+To have an image cover its parent element, add the `.uk-cover-container` class to the parent and the `data-uk-cover` attribute to the image.
+
+<Ec path="cover.1" />
+
+<span class="uk-label uk-label-primary">Note</span> To position content on top
+of the covering element, use the [Position component](/docs/2.1/position).
+
+<Snippet component="cover.basic" />
+
+## Video
+
+To create a video that covers its parent container, add the `data-uk-cover` attribute to a video. Wrap a container element around the video and add the `.uk-cover-container` class to clip the content.
+
+The Cover component inherits all properties from the [Video component](/docs/2.1/video) which means videos are muted and play automatically. The video will pause whenever it's not visible and resume once it becomes visible again.
+
+<Ec path="cover.2" />
+
+<Snippet component="cover.video" />
+
+## Iframe
+
+To apply the Cover component to an iframe, you need to add the `data-uk-cover` attribute to the iframe. Now add the `.uk-cover-container` class to a container element around the iframe to clip the content.
+
+<Ec path="cover.3" />
+
+<Snippet component="cover.iframe" />
+
+## Responsive height
+
+To add responsive behavior to your cover image, you need to create an invisible `<canvas>` element and assign `width` and `height` values to it, according to the aspect ratio you want the covered area to have. That way it will adapt the responsive behavior of the image.
+
+<Ec path="cover.4" />
+
+<Snippet component="cover.responsive_height" />
+
+## Component options
+
+Any of these options can be applied to the component attribute. Separate multiple options with a semicolon. [Learn more](/docs/2.1/javascript#component-configuration)
+
+| Option     | Value   | Default | Description                           |
+| ---------- | ------- | ------- | ------------------------------------- |
+| `automute` | Boolean | true    | Tries to automute the iframe's video. |
+| `width`    | Number  |         | The element's width.                  |
+| `height`   | Number  |         | The element's height.                 |
+
+## JavaScript
+
+Learn more about [JavaScript components](/docs/2.1/javascript).
+
+### Initialization
+
+<Ec path="cover.5" />

@@ -1,0 +1,22 @@
+---
+import { readSnippetDirectories, type Snippet } from "data/snippets_pages";
+import Pages from "layouts/pages/2.1.astro";
+
+export async function getStaticPaths() {
+  const snippets = readSnippetDirectories();
+
+  return snippets.map((snippet: Snippet) => ({
+    params: {
+      category: snippet.category,
+      slug: snippet.slug,
+    },
+    props: {
+      metadata: snippet.metadata,
+    },
+  }));
+}
+
+const { metadata } = Astro.props;
+---
+
+<Pages metadata={metadata} />

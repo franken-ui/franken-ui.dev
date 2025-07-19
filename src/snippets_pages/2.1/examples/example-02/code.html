@@ -1,0 +1,655 @@
+<body class="bg-background font-geist-sans text-foreground antialiased">
+  <div
+    class="border-border uk-shadow-sm flex h-9 items-center border-b px-2 py-1"
+  >
+    <nav class="flex space-x-1 text-sm">
+      <a class="px-3 py-1 font-bold" href="#">Spawtify</a>
+      <div
+        class="uk-drop uk-dropdown min-w-48"
+        data-uk-drop="mode: click; pos: bottom-left"
+      >
+        <ul class="uk-dropdown-nav uk-nav">
+          <li>
+            <a class="uk-drop-close justify-between">About Music</a>
+          </li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Preferences
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘,
+              </span>
+            </a>
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Hide Music
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘H
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Hide Others
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⇧⌘H
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Quit Music
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘Q
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <a class="px-3 py-1" href="#">File</a>
+      <div
+        class="uk-drop uk-dropdown min-w-48"
+        data-uk-drop="mode: click; pos: bottom-left"
+      >
+        <ul class="uk-dropdown-nav uk-nav">
+          <li><a class="uk-drop-close justify-between"> New </a></li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Open Stream URL
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘U
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Close Window
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘W
+              </span>
+            </a>
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li><a class="uk-drop-close justify-between"> Library </a></li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Import
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘O
+              </span>
+            </a>
+          </li>
+          <li><a class="opacity-50"> Burn Playlist to Disc </a></li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Show in Finder
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⇧⌘R
+              </span>
+            </a>
+          </li>
+          <li><a class="uk-drop-close justify-between"> Convert </a></li>
+          <li class="uk-nav-divider"></li>
+          <li><a class="uk-drop-close justify-between"> Page Setup </a></li>
+          <li><a class="opacity-50">Print</a></li>
+        </ul>
+      </div>
+      <a class="px-3 py-1" href="#">Edit</a>
+      <div
+        class="uk-drop uk-dropdown min-w-48"
+        data-uk-drop="mode: click; pos: bottom-left"
+      >
+        <ul class="uk-dropdown-nav uk-nav">
+          <li>
+            <a class="opacity-50">
+              Undo
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘Z
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="opacity-50">
+              Redo
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⇧⌘Z
+              </span>
+            </a>
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="opacity-50">
+              Cut
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘X
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="opacity-50">
+              Copy
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘C
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="opacity-50">
+              Paste
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘V
+              </span>
+            </a>
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Select All
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⌘A
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="opacity-50">
+              Deselect All
+              <span class="ml-auto text-xs tracking-widest opacity-60">
+                ⇧⌘A
+              </span>
+            </a>
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Smart Dictation
+              <span class="text-muted-foreground ml-auto">
+                <uk-icon icon="mic-vocal"></uk-icon>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a class="uk-drop-close justify-between">
+              Emojis & Symbols
+              <span class="text-muted-foreground ml-auto">
+                <uk-icon icon="globe"></uk-icon>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <a class="px-3 py-1" href="#">View</a>
+      <div
+        class="uk-drop uk-dropdown min-w-48"
+        data-uk-drop="mode: click; pos: bottom-left"
+      >
+        <ul class="uk-dropdown-nav uk-nav">
+          <li>
+            <a class="uk-drop-close">
+              <span class="ml-6">Show Playing Next</span>
+            </a>
+          </li>
+          <li>
+            <a class="uk-drop-close">
+              <uk-icon class="mr-2" icon="check"></uk-icon>
+              Show Lyrics
+            </a>
+          </li>
+          <li>
+            <a class="opacity-50">
+              <span class="ml-6">Show Status Bar</span>
+            </a>
+          </li>
+          <li>
+            <a class="uk-drop-close">
+              <span class="ml-6">Hide Sidebar</span>
+            </a>
+          </li>
+          <li>
+            <a class="opacity-50">
+              <span class="ml-6">Enter Full Screen</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <a class="px-3 py-1" href="#">Account</a>
+      <div
+        class="uk-drop uk-dropdown"
+        data-uk-drop="mode: click; pos: bottom-left"
+      >
+        <ul class="uk-dropdown-nav uk-nav">
+          <li class="uk-nav-header">
+            <span class="ml-6"> Switch Account </span>
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close"> <span class="ml-6">Andy</span> </a>
+          </li>
+          <li>
+            <a class="uk-drop-close">
+              <uk-icon class="mr-2" icon="circle-dot"></uk-icon>
+              Benoit
+            </a>
+          </li>
+          <li>
+            <a class="uk-drop-close"> <span class="ml-6">Luis</span> </a>
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close">
+              <span class="ml-6">Manage Family</span>
+            </a>
+          </li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close">
+              <span class="ml-6">Add Account</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="grid grid-cols-5">
+    <div class="hidden space-y-4 py-4 lg:block">
+      <div class="px-3 py-2">
+        <h2 class="mb-2 px-3 text-lg font-semibold tracking-tight">Discover</h2>
+        <ul class="uk-nav uk-nav-secondary">
+          <li class="uk-active">
+            <a class="font-medium">
+              <span class="mr-2 size-4">
+                <uk-icon icon="circle-play"></uk-icon>
+              </span>
+              Listen Now
+            </a>
+          </li>
+          <li>
+            <a class="font-medium">
+              <span class="mr-2 size-4">
+                <uk-icon icon="binoculars"></uk-icon>
+              </span>
+              Browse
+            </a>
+          </li>
+          <li>
+            <a class="font-medium">
+              <span class="mr-2 size-4">
+                <uk-icon icon="radio"></uk-icon>
+              </span>
+              Radio
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="px-3 py-2">
+        <h2 class="mb-2 px-3 text-lg font-semibold tracking-tight">Library</h2>
+        <ul class="uk-nav uk-nav-secondary">
+          <li>
+            <a class="font-medium">
+              <span class="mr-2 size-4">
+                <uk-icon icon="list-music"></uk-icon>
+              </span>
+              Playlists
+            </a>
+          </li>
+          <li>
+            <a class="font-medium">
+              <span class="mr-2 size-4">
+                <uk-icon icon="music-2"></uk-icon>
+              </span>
+              Songs
+            </a>
+          </li>
+          <li>
+            <a class="font-medium">
+              <span class="mr-2 size-4">
+                <uk-icon icon="user"></uk-icon>
+              </span>
+              Made for You
+            </a>
+          </li>
+          <li>
+            <a class="font-medium">
+              <span class="mr-2 size-4">
+                <uk-icon icon="mic-vocal"></uk-icon>
+              </span>
+              Artists
+            </a>
+          </li>
+          <li>
+            <a class="font-medium">
+              <span class="mr-2 size-4">
+                <uk-icon icon="library"></uk-icon>
+              </span>
+              Albums
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="px-3 py-2">
+        <h2 class="mb-2 px-3 text-lg font-semibold tracking-tight">
+          Playlists
+        </h2>
+        <div class="max-h-60 overflow-y-auto">
+          <ul class="uk-nav uk-nav-secondary">
+            <li>
+              <a class="font-medium">
+                <span class="mr-2 size-4">
+                  <uk-icon icon="library"></uk-icon>
+                </span>
+                Recently Added
+              </a>
+            </li>
+            <li>
+              <a class="font-medium">
+                <span class="mr-2 size-4">
+                  <uk-icon icon="library"></uk-icon>
+                </span>
+                Recently Played
+              </a>
+            </li>
+            <li>
+              <a class="font-medium">
+                <span class="mr-2 size-4">
+                  <uk-icon icon="library"></uk-icon>
+                </span>
+                Top Songs
+              </a>
+            </li>
+            <li>
+              <a class="font-medium">
+                <span class="mr-2 size-4">
+                  <uk-icon icon="library"></uk-icon>
+                </span>
+                Top Albums
+              </a>
+            </li>
+            <li>
+              <a class="font-medium">
+                <span class="mr-2 size-4">
+                  <uk-icon icon="library"></uk-icon>
+                </span>
+                Top Artists
+              </a>
+            </li>
+            <li>
+              <a class="font-medium">
+                <span class="mr-2 size-4">
+                  <uk-icon icon="library"></uk-icon>
+                </span>
+                Logic Discography
+              </a>
+            </li>
+            <li>
+              <a class="font-medium">
+                <span class="mr-2 size-4">
+                  <uk-icon icon="library"></uk-icon>
+                </span>
+                Bedtime Beats
+              </a>
+            </li>
+            <li>
+              <a class="font-medium">
+                <span class="mr-2 size-4">
+                  <uk-icon icon="library"></uk-icon>
+                </span>
+                I miss Y2K Pop
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="border-border col-span-5 border-l lg:col-span-4">
+      <div class="px-8 py-6">
+        <div class="flex items-center justify-between">
+          <div class="max-w-80">
+            <ul
+              class="uk-tab-alt"
+              uk-switcher="connect: #component-nav; animation: uk-anmt-slide-left-sm"
+            >
+              <li class="uk-active"><a href="#">Music</a></li>
+              <li><a href="#">Podcasts</a></li>
+              <li class="uk-disabled"><a class="opacity-50">Live</a></li>
+            </ul>
+          </div>
+          <div class="">
+            <button class="uk-btn uk-btn-primary">
+              <span class="mr-2 size-4">
+                <uk-icon icon="circle-plus"></uk-icon>
+              </span>
+              Add music
+            </button>
+          </div>
+        </div>
+        <ul id="component-nav" class="uk-switcher mt-6">
+          <li>
+            <div class="space-y-1">
+              <h2 class="text-2xl font-semibold tracking-tight">Listen Now</h2>
+              <p class="text-muted-foreground text-sm">
+                Top picks for you. Updated daily.
+              </p>
+            </div>
+            <div class="bg-border my-4 h-[1px] w-full"></div>
+            <div class="grid grid-cols-5 gap-x-4">
+              <div class="space-y-3">
+                <div class="uk-rounded h-96 overflow-hidden">
+                  <video
+                    class="h-full w-full object-cover"
+                    src="https://pages.franken-ui.dev/ai/videos/01.mp4"
+                    data-uk-video
+                    loop
+                    muted
+                  ></video>
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">Viva La Felina</h3>
+                  <p class="text-muted-foreground text-xs">Catplay</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="uk-rounded h-96 overflow-hidden">
+                  <video
+                    class="h-full w-full object-cover"
+                    src="https://pages.franken-ui.dev/ai/videos/02.mp4"
+                    data-uk-video
+                    loop
+                    muted
+                  ></video>
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">Feline on a Prayer</h3>
+                  <p class="text-muted-foreground text-xs">Cat Jovi</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="uk-rounded h-96 overflow-hidden">
+                  <video
+                    class="h-full w-full object-cover"
+                    src="https://pages.franken-ui.dev/ai/videos/03.mp4"
+                    data-uk-video
+                    loop
+                    muted
+                  ></video>
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">
+                    Death By a Thousand Cats
+                  </h3>
+                  <p class="text-muted-foreground text-xs">Tailor Swift</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="uk-rounded h-96 overflow-hidden">
+                  <video
+                    class="h-full w-full object-cover"
+                    src="https://pages.franken-ui.dev/ai/videos/04.mp4"
+                    data-uk-video
+                    loop
+                    muted
+                  ></video>
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">Meow-terial Girl</h3>
+                  <p class="text-muted-foreground text-xs">Catdonna</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="uk-rounded h-96 overflow-hidden">
+                  <video
+                    class="h-full w-full object-cover"
+                    src="https://pages.franken-ui.dev/ai/videos/05.mp4"
+                    data-uk-video
+                    loop
+                    muted
+                  ></video>
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">
+                    Oops!... I Pounced Again
+                  </h3>
+                  <p class="text-muted-foreground text-xs">Britney Spurrs</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 space-y-1">
+              <h2 class="text-2xl font-semibold tracking-tight">
+                Made for You
+              </h2>
+              <p class="text-muted-foreground text-sm">
+                Your personal playlists. Updated daily.
+              </p>
+            </div>
+            <div class="bg-border my-4 h-[1px] w-full"></div>
+            <div class="grid grid-cols-6 gap-x-4">
+              <div class="space-y-3">
+                <div
+                  class="uk-rounded uk-anmt-toggle aspect-square w-full overflow-hidden"
+                >
+                  <img
+                    class="transition-transform duration-200 hover:scale-105"
+                    src="https://pages.franken-ui.dev/ai/images/01.jpeg"
+                    alt=""
+                  />
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">What&#39;s Up Dawg?</h3>
+                  <p class="text-muted-foreground text-xs">4 Non Cats</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div
+                  class="uk-rounded uk-anmt-toggle aspect-square w-full overflow-hidden"
+                >
+                  <img
+                    class="transition-transform duration-200 hover:scale-105"
+                    src="https://pages.franken-ui.dev/ai/images/02.webp"
+                    alt=""
+                  />
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">Pawz on My Mind</h3>
+                  <p class="text-muted-foreground text-xs">Meow-Z</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div
+                  class="uk-rounded uk-anmt-toggle aspect-square w-full overflow-hidden"
+                >
+                  <img
+                    class="transition-transform duration-200 hover:scale-105"
+                    src="https://pages.franken-ui.dev/ai/images/03.jpeg"
+                    alt=""
+                  />
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">
+                    Can&#39;t Stop the Meowing
+                  </h3>
+                  <p class="text-muted-foreground text-xs">
+                    Justin Timpurrlake
+                  </p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div
+                  class="uk-rounded uk-anmt-toggle aspect-square w-full overflow-hidden"
+                >
+                  <img
+                    class="transition-transform duration-200 hover:scale-105"
+                    src="https://pages.franken-ui.dev/ai/images/04.webp"
+                    alt=""
+                  />
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">Rolling in the Purr</h3>
+                  <p class="text-muted-foreground text-xs">Catdelle</p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div
+                  class="uk-rounded uk-anmt-toggle aspect-square w-full overflow-hidden"
+                >
+                  <img
+                    class="transition-transform duration-200 hover:scale-105"
+                    src="https://pages.franken-ui.dev/ai/images/05.webp"
+                    alt=""
+                  />
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">
+                    Straight Outta Catnip
+                  </h3>
+                  <p class="text-muted-foreground text-xs">
+                    CATWA (Catz With Attitude)
+                  </p>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div
+                  class="uk-rounded uk-anmt-toggle aspect-square w-full overflow-hidden"
+                >
+                  <img
+                    class="transition-transform duration-200 hover:scale-105"
+                    src="https://pages.franken-ui.dev/ai/images/06.jpeg"
+                    alt=""
+                  />
+                </div>
+                <div class="space-y-1 text-sm">
+                  <h3 class="font-medium leading-none">Meow Me Maybe</h3>
+                  <p class="text-muted-foreground text-xs">Carly Rae Purrsen</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="space-y-1">
+              <h2 class="text-2xl font-semibold tracking-tight">
+                New Episodes
+              </h2>
+              <p class="text-muted-foreground text-sm">
+                Your favorite podcasts. Updated daily.
+              </p>
+            </div>
+            <div class="bg-border my-4 h-[1px] w-full"></div>
+            <div
+              class="uk-placeholder flex h-[450px] items-center justify-center rounded-md"
+            >
+              <div
+                class="mx-auto flex max-w-[420px] flex-col items-center justify-center text-center"
+              >
+                <uk-icon size="40" icon="podcast"></uk-icon>
+                <h3 class="mt-4 text-lg font-semibold">No episodes added</h3>
+                <p class="text-muted-foreground mb-4 mt-2 text-sm">
+                  You have not added any podcasts. Add one below.
+                </p>
+                <button class="uk-btn uk-btn-primary">Add Podcast</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>

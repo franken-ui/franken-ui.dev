@@ -1,0 +1,148 @@
+---
+group: components
+text: Calendar
+title: Calendar
+lead: Easily create nice looking calendar.
+meta:
+  description: Easily create nice looking calendar.
+webc: true
+---
+
+import Ec from "snippets/ec.astro";
+import Snippet from "snippets/component.astro";
+
+## Usage
+
+You can build your calendar manually using server-side rendering with the following classes, or use our web components that have been built from scratch with the `<uk-calendar>` markup.
+
+### Manual server-side rendering
+
+Use the following classes to create your calendar:
+
+| Class            | Description                                                                     |
+| ---------------- | ------------------------------------------------------------------------------- |
+| `uk-cal`         | The calendar wrapper                                                            |
+| `uk-cal-oom`     | For dates that are out-of-month                                                 |
+| `uk-active`      | To show the active date                                                         |
+| `uk-disabled`    | To disable a date (add `disabled` attribute to the button for full disablement) |
+| `uk-cal-marked`  | To add an indicator for "marked dates" (dates with events)                      |
+| `uk-cal-divider` | To add a divider between calendar weeks.                                        |
+
+<Snippet component="calendar.basic" />
+
+### Web components
+
+Alternatively, you can use our web components with the `<uk-calendar>` markup.
+
+<Snippet component="calendar.web_components" />
+
+## Setting the current day
+
+To automatically set today's date as the active date in the calendar, use the `today` attribute. This will highlight the current day in the calendar, making it easy for users to quickly identify the current date.
+
+<Snippet component="calendar.today" />
+
+By default, this attribute is set to `false`, meaning today's date will not be automatically highlighted.
+
+## Enabling month and year selection
+
+To allow month and year selection, use the `jumpable` attribute. This will enable a dropdown menu for selecting the month and a text input field for entering the year, allowing users to quickly "jump" to a specific date.
+
+<Snippet component="calendar.jumpable" />
+
+By default, this attribute is set to `false`, meaning the calendar will not provide month and year selection options.
+
+## Setting the starting day of the week
+
+To customize the starting day of the week in the calendar, use the `starts-with` attribute. This allows you to specify whether the week should start on Sunday (0) or Monday (1). By default, the week starts on Sunday (0).
+
+<Snippet component="calendar.starts_with" />
+
+## Disabling specific dates
+
+To disable specific dates in the calendar, use the `disabled-dates` attribute. This attribute accepts a comma-separated list of dates. Please note that dates must be in the format `YYYY-MM-DD` (e.g. `2022-07-25`). Dates that do not follow this format will be ignored and a console error will be thrown. The calendar will still render, but the invalid dates will not be disabled.
+
+<Snippet component="calendar.disabled_dates" />
+
+## Marking specific dates
+
+To add an indicator to specific dates in the calendar, use the `marked-dates` attribute. This attribute accepts a comma-separated list of dates. Please note that dates must be in the format `YYYY-MM-DD` (e.g. `2022-07-25`). Dates that do not follow this format will be ignored and a console error will be thrown. The calendar will still render, but the invalid dates will not be marked.
+
+<Snippet component="calendar.marked_dates" />
+
+## Setting the view date
+
+To customize the initial view date of the calendar, use the `view-date` attribute. By default, the calendar will display the current date. To set a custom view date, provide a date in the format `YYYY-MM-DD` (e.g. `2023-06-30`). This will cause the calendar to display the specified month and year.
+
+<Snippet component="calendar.view_date" />
+
+## Setting the minimum and maximum date
+
+To set the minimum and maximum date that can be selected in the calendar, use the `min` and `max` attributes. These attributes accept dates in the format `YYYY-MM-DD` (e.g. `2022-07-25`).
+
+<Snippet component="calendar.min_max" />
+
+## Setting the current value
+
+To set the current value of the calendar, use the `value` attribute. This attribute accepts a date in the format `YYYY-MM-DD` (e.g. `2020-05-06`). Please note that this attribute takes precedence over `view-date` and `today`, so setting `value` will override any settings made with those attributes.
+
+<Snippet component="calendar.active" />
+
+## Capturing values
+
+There are several ways to capture values from the `<uk-calendar>` component. The simplest approach is to add a `name` attribute to the component. When you do this, a hidden input field with the specified name will be automatically generated, allowing you to easily capture the selected value on your server.
+
+<Ec path="calendar.1" />
+
+This is useful when you need to include the calendar component in a form and capture the selected date as part of the form submission.
+
+## Internationalization
+
+<Snippet component="calendar.i18n" />
+
+## Available options
+
+| Name       | Description                                                          |
+| ---------- | -------------------------------------------------------------------- |
+| `weekdays` | A comma-separated list of days of the week, starting from Sunday.    |
+| `months`   | A comma-separated list of months of the year, starting from January. |
+
+## Custom classes
+
+To add custom classes, use the `cls-custom` attribute. This attribute accepts two formats:
+
+- A JSON-stringified object
+- A valid `key: value; foo: bar;` format
+
+If you pass only class names, they will be applied directly to the calendar component.
+
+<Snippet component="calendar.cls_custom" />
+
+## Attributes
+
+The following attributes are available for this component:
+
+| Name                     | Type    | Default    | Description                                                                                                   |
+| ------------------------ | ------- | ---------- | ------------------------------------------------------------------------------------------------------------- |
+| `force-prevent-rerender` | Boolean | false      | Forcefully prevents component rerendering.                                                                    |
+| `weekday-abbr-length`    | String  | 3          | Customize the length of weekday abbreviations (e.g., Monday → Mon).                                           |
+| `today`                  | Boolean | false      | Automatically sets today as the active date.                                                                  |
+| `jumpable`               | Boolean | false      | Allows user to select a month and type a year for the calendar to "jump" to a specific date.                  |
+| `starts-with`            | String  | 0 (Sunday) | Sets the starting day of the week. Either "0" (Sunday) or "1" (Monday).                                       |
+| `disabled-dates`         | String  |            | A comma-separated list of dates to disable. Dates must be in the format YYYY-MM-DD.                           |
+| `marked-dates`           | String  |            | A comma-separated list of dates to add an indicator. Dates must be in the format YYYY-MM-DD.                  |
+| `view-date`              | String  |            | Sets the initial view date of the calendar. Dates must be in the format YYYY-MM-DD.                           |
+| `min`                    | String  |            | Sets the minimum date that can be selected. Dates must be in the format YYYY-MM-DD.                           |
+| `max`                    | String  |            | Sets the maximum date that can be selected. Dates must be in the format YYYY-MM-DD.                           |
+| `value`                  | String  |            | Sets the current value of the calendar. Dates must be in the format YYYY-MM-DD.                               |
+| `name`                   | String  |            | Sets the name of the hidden input field, allowing the calendar's value to be submitted with a form.           |
+| `cls-custom`             | String  |            | Allows you to add custom CSS classes.                                                                         |
+| `i18n`                   | String  |            | Enables internationalization. Please see [Internationalization](#internationalization) for available options. |
+
+## Events
+
+The Calendar component triggers the following events on elements with this component attached:
+
+| Name                 | Description                         |
+| -------------------- | ----------------------------------- |
+| `uk-calendar:change` | Fired when active date has changed. |

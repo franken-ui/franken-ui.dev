@@ -1,0 +1,11 @@
+---
+import type { GetStaticPaths } from "astro";
+import paths from "data/snippets/2.0";
+
+export const partial = true;
+export const getStaticPaths = paths satisfies GetStaticPaths;
+
+const { content } = Astro.props;
+---
+
+<Fragment set:html={content} />

@@ -1,0 +1,643 @@
+---
+import { getCollection, getEntry, render } from "astro:content";
+import Master from "layouts/master/latest.astro";
+import { titleCase } from "helpers/common";
+import { getCategorizedSnippets } from "data/snippets_pages";
+import Monster from "components/monster.astro";
+import Announcement from "components/announcement.astro";
+import VersionSwitcher from "components/version-switcher.astro";
+
+type Heading = {
+  depth: number;
+  slug: string;
+  text: string;
+  children?: Heading[];
+};
+
+function transformHeadings(headings: Heading[]): Heading[] {
+  const result: Heading[] = [];
+  const stack: Heading[] = [];
+
+  for (const heading of headings) {
+    const current = { ...heading };
+
+    // Remove all items from stack that have greater or equal depth
+    while (stack.length > 0 && stack[stack.length - 1].depth >= current.depth) {
+      stack.pop();
+    }
+
+    if (stack.length === 0) {
+      // This is a top-level heading
+      result.push(current);
+      stack.push(current);
+    } else {
+      // This is a child heading
+      const parent = stack[stack.length - 1];
+      if (!parent.children) {
+        parent.children = [];
+      }
+      parent.children.push(current);
+      stack.push(current);
+    }
+  }
+
+  return result;
+}
+
+type Group = {
+  href: string;
+  text: string;
+  keywords: string | undefined;
+  ping: boolean | undefined;
+  submenu:
+    | {
+        href: string;
+        text: string;
+        target?: "_self" | "_blank" | "_parent" | "_top" | undefined;
+      }[]
+    | undefined;
+  order: number | undefined;
+};
+
+const { version = "2.1", id } = Astro.props;
+
+const docs = await getCollection("2.1");
+const groupsForDocumentation: {
+  "getting-started": Group[];
+  forms: Group[];
+  components: Group[];
+} = {
+  "getting-started": [],
+  forms: [],
+  components: [],
+};
+
+docs.forEach((a) => {
+  if (a.data.hidden !== true) {
+    groupsForDocumentation[
+      a.data.group as "getting-started" | "components" | "forms"
+    ].push({
+      href: a.id,
+      text: a.data.text,
+      keywords: a.data.keywords,
+      ping: a.data.ping,
+      submenu: a.data.submenu,
+      order: a.data.order,
+    });
+  }
+});
+
+const groupsForPages = getCategorizedSnippets();
+
+const entry = await getEntry(version, id);
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+
+const tableOfContents = transformHeadings(headings);
+
+function isActive(href: string): boolean {
+  if (entry.data.alias === href) {
+    return true;
+  }
+
+  return entry.id === href;
+}
+---
+
+<Master
+  doc={{
+    title: remarkPluginFrontmatter.title,
+    meta: { ...remarkPluginFrontmatter.meta, "docsearch:version": "2.1" },
+  }}
+>
+  <div class="border-border fixed inset-x-0 top-0 z-10 border-b">
+    <div class="bg-background text-foreground">
+      <div class="flex h-14 items-center justify-between gap-8 px-4 sm:px-6">
+        <div class="flex items-center gap-2">
+          <a class="uk-focus-visible hidden lg:block" href="/">
+            <Monster cls="size-12" />
+          </a>
+
+          <button
+            class="uk-btn uk-btn-secondary uk-btn-sm lg:hidden"
+            data-uk-toggle="#menu"
+          >
+            <uk-icon class="size-4" icon="menu"></uk-icon>
+            <span class="ml-2">Menu</span>
+          </button>
+
+          <VersionSwitcher />
+
+          <Announcement
+            href="https://franken.style"
+            headline="Frankenstyle"
+            subtext="No-buid, value-driven, utility-first CSS framework"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          <a
+            class="btn-search w-3xs group max-md:hidden"
+            data-uk-toggle="#search"
+            style="--topbar-search-height: 2rem; --topbar-search-kbd-radius: 0.375rem; --topbar-search-padding: 0.5rem"
+          >
+            <div class="flex flex-1 items-center">
+              <span class="mr-2 size-4">
+                <uk-icon icon="search"></uk-icon>
+              </span>
+              <span>Search</span>
+            </div>
+            <kbd
+              class="group-hover:border-accent-foreground/10 group-hover:text-accent-foreground"
+            >
+              Ctrl + /
+            </kbd>
+          </a>
+
+          <div class="flex gap-x-2">
+            <a
+              class="uk-btn uk-btn-primary uk-btn-sm hidden sm:inline-flex"
+              href="https://github.com/franken-ui/contexts"
+              title="Contexts"
+              target="_blank"
+            >
+              <uk-icon class="size" style="--size: 4" icon="sparkles"></uk-icon>
+              <span class="">Contexts</span>
+            </a>
+            <a
+              class="uk-btn uk-btn-secondary uk-btn-sm hidden sm:inline-flex"
+              href="https://github.com/franken-ui/ui"
+              title="Star on Github"
+              target="_blank"
+            >
+              <uk-icon class="size-4" icon="github"></uk-icon>
+              <span class="">Star on Github</span>
+            </a>
+
+            <button
+              class="uk-btn uk-btn-icon uk-btn-secondary uk-btn-sm"
+              data-uk-toggle="#theme"
+            >
+              <uk-icon icon="palette"></uk-icon>
+            </button>
+
+            <uk-lsh
+              class="size-8 dark:hidden"
+              value="dark"
+              group="mode"
+              cls-custom="uk-btn uk-btn-icon uk-btn-secondary uk-btn-sm"
+            >
+              <template>
+                <uk-icon icon="moon"></uk-icon>
+              </template>
+            </uk-lsh>
+            <uk-lsh
+              class="hidden size-8 dark:inline-block"
+              value="light"
+              group="mode"
+              cls-custom="uk-btn uk-btn-icon uk-btn-secondary uk-btn-sm"
+            >
+              <template>
+                <uk-icon icon="sun"></uk-icon>
+              </template>
+            </uk-lsh>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="root-layout">
+    <aside class="root-sidebar">
+      <div class="absolute inset-0">
+        <div
+          class="root-sidebar-scrollable-area"
+          x-data
+          x-init='const asideL=document.querySelector(".root-sidebar-scrollable-area");if(asideL){let e=asideL.querySelector("li.uk-parent.uk-open"),i=e.querySelector("li.uk-active"),o={asideL:asideL.getBoundingClientRect(),focused:i.getBoundingClientRect()},t=i.offsetTop-asideL.offsetTop-o.asideL.height/2+o.focused.height/2;asideL.scrollTo({top:t,behavior:"smooth"})}'
+        >
+          <ul
+            id="nav"
+            class="uk-nav uk-nav-default -mx-1 mt-1"
+            data-uk-nav="collapsible: false"
+          >
+            <li class="uk-nav-header">Documentation</li>
+            {
+              Object.keys(groupsForDocumentation).map((a) => (
+                <li
+                  class={`uk-parent ${entry.data.group === a ? "uk-open" : ""}`}
+                >
+                  <a href="#">
+                    {titleCase(a)} <span uk-nav-parent-icon />
+                  </a>
+                  <ul class="uk-nav-sub" hidden={entry.data.group !== a}>
+                    {groupsForDocumentation[a as "getting-started"]
+                      .sort((z: Group, y: Group) => {
+                        if (
+                          ["getting-started", "charts", "tools"].includes(a)
+                        ) {
+                          return (z.order || 0) - (y.order || 0);
+                        }
+
+                        return z.text.localeCompare(y.text);
+                      })
+                      .map((z: Group, y) => (
+                        <li
+                          id={`test-${y}`}
+                          class={isActive(z.href) ? "uk-active" : ""}
+                        >
+                          <a
+                            class="flex items-center justify-between"
+                            href={`/docs/2.1/${z.href}`}
+                          >
+                            <span class="flex-1">{z.text}</span>
+                            {z.ping === true ? (
+                              <span class="relative flex h-2 w-2 flex-none">
+                                <span class="bg-primary/75 absolute inline-flex h-full w-full animate-ping rounded-full" />
+                                <span class="bg-primary relative inline-flex h-2 w-2 rounded-full" />
+                              </span>
+                            ) : (
+                              ""
+                            )}
+                          </a>
+                          {z.submenu ? (
+                            <ul>
+                              {z.submenu.map((y) => (
+                                <li>
+                                  <a
+                                    class="flex items-center justify-between"
+                                    href={y.href}
+                                    target={y.target || "_self"}
+                                  >
+                                    <span class="flex-1">{y.text}</span>
+                                    {y.href.startsWith("http") ? (
+                                      <uk-icon icon="external-link" />
+                                    ) : (
+                                      ""
+                                    )}
+                                  </a>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            ""
+                          )}
+                        </li>
+                      ))}
+                  </ul>
+                </li>
+              ))
+            }
+          </ul>
+
+          <ul
+            class="uk-nav uk-nav-default -mx-1 mt-4 hidden lg:block"
+            data-uk-nav
+          >
+            <li class="uk-nav-header">Premade Pages</li>
+            {
+              Object.keys(groupsForPages).map((a) => (
+                <li class="uk-parent">
+                  <a href="#">
+                    {titleCase(a)} <span uk-nav-parent-icon />
+                  </a>
+                  <ul class="uk-nav-sub" hidden>
+                    {groupsForPages[a].map((b) => (
+                      <li>
+                        <a
+                          class="flex items-center justify-between"
+                          href={`/pages/2.1/${b.metadata.category}/${b.metadata.id}`}
+                          target="_blank"
+                        >
+                          <span class="flex-1">{b.metadata.text}</span>
+                          {b.metadata.ping === true ? (
+                            <span class="relative flex h-2 w-2 flex-none">
+                              <span class="bg-primary/75 absolute inline-flex h-full w-full animate-ping rounded-full" />
+                              <span class="bg-primary relative inline-flex h-2 w-2 rounded-full" />
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </aside>
+    <div class="root-divider-l"></div>
+    <div class="root-main">
+      <div
+        class="isolate mx-auto grid w-full max-w-2xl grid-cols-1 gap-10 pt-10 md:pb-24 xl:max-w-5xl"
+      >
+        <div class="px-4 sm:px-6">
+          {
+            entry.data.webc === true ? (
+              <div class="mb-5">
+                <span class="bg-accent text-accent-foreground inline-flex items-center justify-between rounded-full px-1 py-1 pr-4 text-sm">
+                  <span class="bg-primary text-primary-foreground mr-3 rounded-full px-3 py-1.5 text-xs">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M11.7 4H6.6L2 12l4.6 8h5.1l-4.76-8z" class="b" />
+                      <path
+                        d="m12.56 19.49.31.51h4.28l2.21-3.74h-8.72zM14.26 15.57h5.44l1.87-3.23h-5.44zM19.36 7.74 17.15 4h-4.28l-.31.51-1.92 3.23zM14.26 8.43l1.87 3.23h5.44L19.7 8.43z"
+                        class="b"
+                      />
+                    </svg>
+                  </span>
+                  <span class="text-sm font-medium">Web Component</span>
+                </span>
+              </div>
+            ) : (
+              ""
+            )
+          }
+
+          <h1 class="uk-h1">
+            {entry.data.title}
+          </h1>
+
+          {
+            entry.data.lead ? (
+              <p class="uk-text-lead mt-2">{entry.data.lead}</p>
+            ) : (
+              ""
+            )
+          }
+
+          {
+            entry.data.wip === true ? (
+              <div class="uk-alert-warning uk-alert mt-6">
+                This documentation is a work in progress.
+              </div>
+            ) : (
+              ""
+            )
+          }
+
+          {
+            entry.data.tbc === false ? (
+              ""
+            ) : tableOfContents.length > 0 ? (
+              <Fragment>
+                <h2 class="uk-h2 mt-10" id="docs-table-of-contents">
+                  Table of contents
+                </h2>
+
+                <ul
+                  class="uk-nav uk-nav-default -ml-2 mt-6"
+                  style="--uk-nav-sub-width: 0; --uk-nav-item-display: inline-flex"
+                >
+                  {tableOfContents.map((a) => (
+                    <li>
+                      <a href={`#${a.slug}`} data-uk-scroll="offset: 40">
+                        <uk-icon
+                          class="text-destructive mr-2 size-4"
+                          icon="hash"
+                        />
+                        {a.text}
+                      </a>
+                      {a.children ? (
+                        <ul class="uk-nav-sub">
+                          {a.children.map((b) => (
+                            <li>
+                              <a
+                                href={`#${b.slug}`}
+                                data-uk-scroll="offset: 40"
+                              >
+                                <uk-icon
+                                  class="text-destructive mr-2 size-4"
+                                  icon="hash"
+                                />
+                                {b.text}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        ""
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </Fragment>
+            ) : (
+              ""
+            )
+          }
+
+          <Content />
+        </div>
+      </div>
+    </div>
+    <div class="root-divider-r"></div>
+  </div>
+
+  <uk-command id="cmd" key="/" toggle="search">
+    <select hidden>
+      {
+        Object.keys(groupsForDocumentation).map((a) => (
+          <optgroup label={titleCase(a)}>
+            {groupsForDocumentation[a as "getting-started"].map((z: Group) => (
+              <option
+                data-icon="circle-dashed"
+                data-keywords={z.keywords}
+                value={`/docs/2.1/${z.href}`}
+              >
+                {z.text}
+              </option>
+            ))}
+          </optgroup>
+        ))
+      }
+    </select>
+  </uk-command>
+
+  <div
+    class="uk-offcanvas"
+    data-uk-offcanvas="overlay: true"
+    id="menu"
+    style="--uk-offcanvas-bar-width: 320px; --uk-offcanvas-bar-width-i: -320px;"
+  >
+    <div class="uk-offcanvas-bar p-4">
+      <div class="mb-4 flex justify-center">
+        <button class="uk-btn uk-btn-secondary uk-btn-xs uk-offcanvas-close">
+          <uk-icon icon="arrow-left"></uk-icon>
+          <span class="ml-2">Close</span>
+        </button>
+      </div>
+
+      <ul
+        id="nav"
+        class="uk-nav uk-nav-default -mx-1 mt-1"
+        data-uk-nav="collapsible: false"
+      >
+        <li class="uk-nav-header">Documentation</li>
+        {
+          Object.keys(groupsForDocumentation).map((a) => (
+            <li class={`uk-parent ${entry.data.group === a ? "uk-open" : ""}`}>
+              <a href="#">
+                {titleCase(a)} <span uk-nav-parent-icon />
+              </a>
+              <ul class="uk-nav-sub" hidden={entry.data.group !== a}>
+                {groupsForDocumentation[a as "getting-started"]
+                  .sort((z: Group, y: Group) => {
+                    if (["getting-started", "charts", "tools"].includes(a)) {
+                      return (z.order || 0) - (y.order || 0);
+                    }
+
+                    return z.text.localeCompare(y.text);
+                  })
+                  .map((z: Group, y) => (
+                    <li
+                      id={`test-${y}`}
+                      class={isActive(z.href) ? "uk-active" : ""}
+                    >
+                      <a
+                        class="flex items-center justify-between"
+                        href={`/docs/2.1/${z.href}`}
+                      >
+                        <span class="flex-1">{z.text}</span>
+                        {z.ping === true ? (
+                          <span class="relative flex h-2 w-2 flex-none">
+                            <span class="bg-primary/75 absolute inline-flex h-full w-full animate-ping rounded-full" />
+                            <span class="bg-primary relative inline-flex h-2 w-2 rounded-full" />
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </a>
+                      {z.submenu ? (
+                        <ul>
+                          {z.submenu.map((y) => (
+                            <li>
+                              <a
+                                class="flex items-center justify-between"
+                                href={y.href}
+                                target={y.target || "_self"}
+                              >
+                                <span class="flex-1">{y.text}</span>
+                                {y.href.startsWith("http") ? (
+                                  <uk-icon icon="external-link" />
+                                ) : (
+                                  ""
+                                )}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        ""
+                      )}
+                    </li>
+                  ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <iframe
+    name="ls"
+    src={`${import.meta.env.PAGES_URL}/ls`}
+    width="0"
+    height="0"
+    style="display: none;"
+    hidden></iframe>
+
+  <script is:inline>
+    const iframe = window.frames["ls"];
+
+    const observer = new MutationObserver(() => {
+      iframe.postMessage(
+        {
+          className: htmlElement.className,
+          classList: Array.from(htmlElement.classList),
+          ls: localStorage.getItem("__FRANKEN__"),
+        },
+        "*",
+      );
+
+      if (htmlElement.classList.contains("dark")) {
+        document.documentElement.dataset.theme = "github-dark";
+      } else {
+        document.documentElement.dataset.theme = "github-light";
+      }
+    });
+
+    observer.observe(htmlElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    window.copyPreview = async function (route) {
+      try {
+        const response = await fetch(route);
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const text = await response.text();
+
+        await navigator.clipboard.writeText(text);
+
+        window.UIkit.notification({
+          message: "Copied to clipboard.",
+          pos: "bottom-right",
+        });
+      } catch (err) {
+        window.UIkit.notification({
+          message: "Network error. Please try again.",
+          status: "destructive",
+          pos: "bottom-right",
+        });
+      }
+    };
+
+    const cmd = document.getElementById("cmd");
+
+    cmd &&
+      cmd.addEventListener("uk-command:click", (e) => {
+        location.href = e.detail.value.value;
+      });
+
+    const monster = document.getElementById("monster");
+
+    if (monster) {
+      let e = document.getElementById("left-eye"),
+        t = document.getElementById("right-eye"),
+        n = { x: 273.91, y: 416.96, maxMove: 20 },
+        i = { x: 475.85, y: 417.34, maxMove: 20 },
+        m = monster.getBoundingClientRect(),
+        l = monster.viewBox.baseVal.width / m.width,
+        s = monster.viewBox.baseVal.height / m.height;
+      function a(a) {
+        let d = (a.clientX - m.left) * l,
+          o = (a.clientY - m.top) * s;
+        [e, t].forEach((e, t) => {
+          let m = 0 === t ? n : i,
+            l = d - m.x,
+            s = o - m.y,
+            a = Math.atan2(s, l),
+            c = Math.min(0.1 * Math.sqrt(l * l + s * s), m.maxMove);
+          e.setAttribute("cx", m.x + Math.cos(a) * c),
+            e.setAttribute("cy", m.y + Math.sin(a) * c);
+        });
+      }
+      let d;
+      function o(e) {
+        d && cancelAnimationFrame(d), (d = requestAnimationFrame(() => a(e)));
+      }
+      document.addEventListener("mousemove", o);
+    }
+  </script>
+</Master>

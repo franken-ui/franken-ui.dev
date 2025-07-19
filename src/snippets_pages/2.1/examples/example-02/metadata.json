@@ -1,0 +1,10 @@
+{
+  "category": "examples",
+  "id": "example-02",
+  "text": "example-02",
+  "title": "Example - Music",
+  "description": "Music features a UI of a music streaming application with sections like Discover, Listen Now and Radio. This type of interface can be useful for a Music or Podcast applications.",
+  "frame": {
+    "height": 1058
+  }
+}

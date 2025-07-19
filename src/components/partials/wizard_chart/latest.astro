@@ -1,0 +1,43 @@
+---
+import WizardTab from "components/wizard_tab.astro";
+import Ec from "snippets/ec.astro";
+---
+
+<div class="mt-10">
+  <WizardTab />
+
+  <ul class="wizard uk-switcher mt-2">
+    <li class="uk-active">
+      <div class="mt-10"></div>
+
+      <p class="uk-paragraph">
+        To include the Chart library via CDN, add the following to your HTML <code
+          class="uk-codespan">&lt;head&gt;</code
+        >:
+      </p>
+
+      <Ec version="2.1" path="installation.chart" />
+    </li>
+    <li>
+      <div class="mt-10"></div>
+
+      <p class="uk-paragraph">
+        If you're building a modern app with a bundler, you can import the
+        JavaScript file from <code class="uk-codespan">franken-ui</code> into your
+        <code class="uk-codespan">app.js</code> file.
+      </p>
+
+      <Ec path="chart_introduction.1" />
+
+      <h2 class="uk-h3 mt-10">CSS</h2>
+
+      <p class="uk-paragraph">
+        To include the necessary CSS, add the extension to your <code
+          class="uk-codespan">vite.config.js</code
+        > file.
+      </p>
+
+      <Ec version="2.1" path="chart.vite_config" />
+    </li>
+  </ul>
+</div>

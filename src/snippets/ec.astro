@@ -1,0 +1,66 @@
+---
+import { resolve } from "path";
+import { readFileSync } from "fs";
+
+const { path, version = "2.0" } = Astro.props;
+
+const route = `/hx/ec/${version}/${path.replace(".", "/")}`;
+
+let lines = 0;
+
+const safelist: any = {
+  "installation.cdn": 4,
+  "installation.utilities": 4,
+  "installation.javascript": 8,
+  "installation.chart": 4,
+  "installation.tailwind_v3": 1,
+  "installation.init": 1,
+  "installation.tailwind_v4": 1,
+  "installation.vite_config": 10,
+  "installation.css": 1,
+  "installation.tailwind_config": 30,
+};
+
+if (Object.keys(safelist).includes(path)) {
+  lines = safelist[path];
+} else {
+  const file = resolve(
+    "src",
+    "pages",
+    "hx",
+    "ec",
+    version,
+    `${path.replace(".", "/")}.mdx`,
+  );
+
+  try {
+    const fileContent = readFileSync(file, "utf-8").trim();
+
+    const codeBlockRegex = /```([\w]+(?:\s+\w+={?[\w-]+}?)*?)\n([\s\S]*?)```/g;
+    let match;
+    let totalLines = 0;
+
+    while ((match = codeBlockRegex.exec(fileContent)) !== null) {
+      const codeBlock = match[2];
+      const lines = codeBlock.split("\n").length;
+      totalLines += lines;
+    }
+
+    lines = totalLines - 1;
+  } catch (error) {
+    console.error(`Error reading file from ${path}:`, error);
+  }
+}
+---
+
+<div class="ec mt-6">
+  <div
+    class="bg-muted animate-pulse"
+    hx-trigger="intersect"
+    hx-get={route}
+    hx-select="figure"
+    hx-swap="outerHTML"
+    style=`height: calc(calc(var(--ec-codeLineHt) * ${lines}) + calc(var(--ec-codePadBlk) * 2) + calc(var(--ec-brdWd) * 2))`
+  >
+  </div>
+</div>

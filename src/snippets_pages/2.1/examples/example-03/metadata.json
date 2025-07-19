@@ -1,0 +1,10 @@
+{
+  "category": "examples",
+  "id": "example-03",
+  "text": "example-03",
+  "title": "Example - Playground",
+  "description": "Intuitive interface for text generation, with customizable settings on the right. Useful for building AI-driven creative writing user interfaces.",
+  "frame": {
+    "height": 828
+  }
+}

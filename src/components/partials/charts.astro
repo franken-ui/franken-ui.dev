@@ -1,0 +1,22 @@
+---
+const { version = "2.0" } = Astro.props;
+---
+
+<div class="mt-6 grid grid-cols-2 gap-4">
+  <a
+    class="chart-card uk-focus-visible uk-shadow uk-rounded"
+    href={`/docs/${version}/chart-area`}
+  >
+    <uk-icon class="h-11 w-11" height="44" width="44" icon="chart-area"
+    ></uk-icon>
+    <p class="mt-2 font-medium">Area Chart</p>
+  </a>
+  <a
+    class="chart-card uk-focus-visible uk-shadow uk-rounded"
+    href={`/docs/${version}/chart-line`}
+  >
+    <uk-icon class="h-11 w-11" height="44" width="44" icon="chart-line"
+    ></uk-icon>
+    <p class="mt-2 font-medium">Line Chart</p>
+  </a>
+</div>

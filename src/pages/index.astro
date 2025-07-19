@@ -1,126 +1,190 @@
 ---
-import "css/app.css";
-import "franken-ui/css/franken-ui.css";
-import core from "franken-ui/js/core.iife?url";
-import icon from "franken-ui/js/icon.iife?url";
+import Examples from "components/examples.astro";
+import Layout from "layouts/master/latest.astro";
+import data from "data/examples";
+import Monster from "components/monster.astro";
+import Announcement from "components/announcement.astro";
+import VersionSwitcher from "components/version-switcher.astro";
+import { titleCase } from "helpers/common";
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-    <link
-      rel="preload"
-      href="/fonts/geist-font/fonts/GeistVariableVF.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/geist-font/fonts/GeistMonoVariableVF.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link rel="stylesheet" href="/fonts/geist-font/style.css" />
-
-    <script is:inline>
-      const htmlElement = document.documentElement;
-
-      const __FRANKEN__ = JSON.parse(
-        localStorage.getItem("__FRANKEN__") || "{}",
-      );
-
-      if (
-        __FRANKEN__.mode === "dark" ||
-        (!__FRANKEN__.mode &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
-        htmlElement.classList.add("dark");
-      } else {
-        htmlElement.classList.remove("dark");
-      }
-
-      htmlElement.classList.add(__FRANKEN__.theme || "uk-theme-zinc");
-      htmlElement.classList.add(__FRANKEN__.radii || "uk-radii-md");
-      htmlElement.classList.add(__FRANKEN__.shadows || "uk-shadows-sm");
-      htmlElement.classList.add(__FRANKEN__.font || "uk-font-sm");
-      htmlElement.classList.add(__FRANKEN__.chart || "uk-chart-default");
-    </script>
-
-    <script is:inline src={core} type="module"></script>
-  </head>
-  <body class="bg-background font-geist-sans text-foreground antialiased">
-    <!-- START CODING HERE -->
-    <div class="uk-container mt-40">
-      <div class="space-y-4">
-        <h1 class="uk-hero-sm text-center font-bold">Franken UI: Dos</h1>
-        <div class="flex justify-center gap-x-2">
-          <a
-            class="uk-btn uk-btn-primary"
-            href="https://franken-ui.dev/docs/introduction"
-          >
-            Learn
+<Layout
+  doc={{
+    title: "Franken UI",
+    meta: {
+      description:
+        "Franken UI is an HTML-first UI component library built on UIkit 3 and extended with LitElement, inspired by shadcn/ui.",
+    },
+  }}
+>
+  <div class="border-border border-b">
+    <div class="bg-background text-foreground">
+      <div class="flex h-14 items-center justify-between gap-8 px-4 sm:px-6">
+        <div class="flex items-center gap-2">
+          <a class="uk-focus-visible block" href="/">
+            <Monster cls="size-12" />
           </a>
-          <div class="uk-inline">
-            <button class="uk-btn uk-btn-default" type="button">
-              Follow <span uk-drop-parent-icon></span>
+
+          <VersionSwitcher />
+
+          <Announcement
+            href="https://franken.style"
+            headline="Frankenstyle"
+            subtext="No-buid, value-driven, utility-first CSS framework"
+          />
+        </div>
+
+        <div class="flex items-center gap-2">
+          <div class="flex gap-x-2">
+            <a
+              class="uk-btn uk-btn-primary uk-btn-sm hidden sm:inline-flex"
+              href="https://github.com/franken-ui/contexts"
+              title="Contexts"
+              target="_blank"
+            >
+              <uk-icon class="size" style="--size: 4" icon="sparkles"></uk-icon>
+              <span class="">Contexts</span>
+            </a>
+            <a
+              class="uk-btn uk-btn-secondary uk-btn-sm hidden sm:inline-flex"
+              href="https://github.com/franken-ui/ui"
+              title="Star on Github"
+              target="_blank"
+            >
+              <uk-icon class="size-4" icon="github"></uk-icon>
+              <span class="">Star on Github</span>
+            </a>
+
+            <button
+              class="uk-btn uk-btn-icon uk-btn-secondary uk-btn-sm"
+              data-uk-toggle="#theme"
+            >
+              <uk-icon icon="palette"></uk-icon>
             </button>
-            <div class="uk-drop uk-dropdown min-w-52" data-uk-dropdown>
-              <ul class="uk-nav uk-dropdown-nav">
-                <li>
-                  <a
-                    class="flex items-center justify-between"
-                    href="https://github.com/franken-ui"
-                    target="_blank"
-                  >
-                    <span class="flex-1">Github</span>
-                    <uk-icon icon="external-link"></uk-icon>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="flex items-center justify-between"
-                    href="https://bsky.app/profile/frankendashui.bsky.social"
-                    target="_blank"
-                  >
-                    <span class="flex-1">Bluesky</span>
-                    <uk-icon icon="external-link"></uk-icon>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="flex items-center justify-between"
-                    href="https://mastodon.social/@frankendashui"
-                    target="_blank"
-                  >
-                    <span class="flex-1">Mastodon</span>
-                    <uk-icon icon="external-link"></uk-icon>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    class="flex items-center justify-between"
-                    href="https://twitter.com/frankendashui"
-                    target="_blank"
-                  >
-                    <span class="flex-1">Twitter</span>
-                    <uk-icon icon="external-link"></uk-icon>
-                  </a>
-                </li>
-              </ul>
-            </div>
+
+            <uk-lsh
+              class="size-8 dark:hidden"
+              value="dark"
+              group="mode"
+              cls-custom="uk-btn uk-btn-icon uk-btn-secondary uk-btn-sm"
+            >
+              <template>
+                <uk-icon icon="moon"></uk-icon>
+              </template>
+            </uk-lsh>
+            <uk-lsh
+              class="hidden size-8 dark:inline-block"
+              value="light"
+              group="mode"
+              cls-custom="uk-btn uk-btn-icon uk-btn-secondary uk-btn-sm"
+            >
+              <template>
+                <uk-icon icon="sun"></uk-icon>
+              </template>
+            </uk-lsh>
           </div>
         </div>
       </div>
     </div>
-    <!-- END -->
+  </div>
 
-    <script is:inline src={icon} type="module"></script>
-  </body>
-</html>
+  <div
+    class="container mx-auto flex flex-col items-center gap-2 py-8 text-center md:py-16 lg:py-20 xl:gap-4"
+  >
+    <h1
+      class="text-primary leading-tighter max-w-2xl text-balance text-4xl font-semibold tracking-tight lg:font-semibold lg:leading-[1.1] xl:text-5xl xl:tracking-tighter"
+    >
+      Franken UI
+    </h1>
+
+    <p class="text-foreground max-w-3xl text-balance text-base sm:text-lg">
+      Franken UI is an HTML-first UI component library built on UIkit 3 and
+      extended with LitElement, inspired by shadcn/ui.
+    </p>
+
+    <div class="flex items-center justify-center gap-2 pt-2">
+      <a class="uk-btn uk-btn-primary uk-btn-sm" href="/docs/2.1/installation">
+        Get Started
+      </a>
+      <a
+        class="uk-btn uk-btn-default uk-btn-sm"
+        href="https://github.com/franken-ui/ui"
+        title="Star on Github"
+        target="_blank"
+      >
+        <uk-icon class="size-4" icon="github"></uk-icon>
+        <span class="">Star on Github</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="px-4">
+    <div class="container mx-auto flex items-center gap-4 py-4">
+      <div class="uk-inline">
+        <button class="uk-btn uk-btn-secondary uk-btn-sm" type="button">
+          <span>Examples</span>
+          <span class="ml-1" data-uk-drop-parent-icon></span>
+        </button>
+        <div
+          class="uk-drop uk-dropdown min-w-56"
+          data-uk-dropdown="mode: click; animation: uk-anmt-slide-top-sm"
+        >
+          <ul class="uk-nav uk-dropdown-nav fr-nav-default">
+            {
+              data.map((a) => (
+                <li>
+                  <a
+                    class="uk-drop-close"
+                    hx-get={`/hx/examples/${a.slug}`}
+                    hx-target="#example"
+                    hx-swap="outerHTML"
+                  >
+                    {a.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="hidden gap-x-1 xl:flex">
+        {
+          ["teal", "blue", "red", "orange", "green", "yellow"].map((a) => (
+            <uk-lsh
+              cls-custom="uk-btn uk-btn-ghost uk-btn-xs"
+              value={`uk-theme-${a}`}
+              group="theme"
+            >
+              <template>{titleCase(a)}</template>
+            </uk-lsh>
+          ))
+        }
+
+        <button class="uk-btn uk-btn-ghost uk-btn-xs" data-uk-toggle="#theme">
+          <span class="ml-2">More</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="container mx-auto">
+      <Examples active="example-02" />
+    </div>
+
+    <div class="px-4 xl:px-6">
+      <div class="flex h-24 w-full items-center justify-between">
+        <p
+          class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm"
+        >
+          Frankensteined by Reden. Like it? Keep the monster caffeinated on <a
+            class="uk-link"
+            href="https://ko-fi.com/sveltecult"
+            target="_blank"
+          >
+            Ko-Fi
+          </a>!
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>

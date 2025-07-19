@@ -1,0 +1,237 @@
+<body class="bg-background font-geist-sans text-foreground antialiased">
+  <div
+    class="border-border flex h-16 items-center justify-between border-b px-8 py-4"
+  >
+    <h2 class="text-lg font-semibold">Playground</h2>
+    <div class="flex w-full flex-1 items-center justify-end gap-x-2">
+      <div class="h-10 w-[200px] lg:w-[300px]">
+        <uk-select
+          class="fr-select"
+          cls-custom="button: uk-input-fake justify-between; dropdown: w-full"
+          icon="chevrons-up-down"
+          placeholder="Load a preset"
+          searchable="true"
+        >
+          <select hidden>
+            <optgroup label="Examples">
+              <option>Grammatical Standard English</option>
+              <option>Summarize for a 2nd grader</option>
+              <option>Text to command</option>
+              <option>Q&amp;A</option>
+              <option>English to other languages</option>
+              <option>Parse unstructured data</option>
+              <option>Classification</option>
+              <option>Natural language to Python</option>
+              <option>Explain code</option>
+              <option>Chat</option>
+              <option>More examples</option>
+            </optgroup>
+          </select>
+        </uk-select>
+      </div>
+      <button class="uk-btn uk-btn-secondary" uk-toggle="#save">Save</button>
+      <div class="uk-flex-top uk-modal" id="save" uk-modal>
+        <div class="uk-margin-auto-vertical uk-modal-dialog">
+          <div class="uk-modal-header">
+            <h2 class="uk-modal-title">Save preset</h2>
+            <p class="text-muted-foreground mt-1.5 text-sm">
+              This will save the current playground state as a preset which you
+              can access later or share with others.
+            </p>
+          </div>
+          <div class="uk-modal-body space-y-4">
+            <div class="space-y-2">
+              <label class="uk-form-label" for="name">Name</label>
+              <input class="uk-input" id="name" type="text" />
+            </div>
+            <div class="space-y-2">
+              <label class="uk-form-label" for="description">Description</label>
+              <input class="uk-input" id="description" type="text" />
+            </div>
+          </div>
+          <div class="uk-modal-footer text-right">
+            <button class="uk-modal-close uk-btn uk-btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+      <button class="uk-btn uk-btn-secondary" disabled>View Code</button>
+      <button class="uk-btn uk-btn-secondary">Share</button>
+      <div
+        class="uk-drop uk-dropdown w-[520px] p-4"
+        uk-drop="mode: click; pos: bottom-right;"
+      >
+        <h3 class="text-lg font-semibold">Share preset</h3>
+        <p class="text-muted-foreground mt-1.5 text-sm">
+          Anyone who has this link and an OpenAI account will be able to view
+          this.
+        </p>
+        <div class="flex items-center space-x-2 pt-4">
+          <div class="flex-1">
+            <input
+              class="uk-input"
+              readonly
+              type="text"
+              value="https://platform.openai.com/playground/p/7bbKYQvsVkNmVb8NGcdUOLae?model=text-davinci-003"
+            />
+          </div>
+          <div class="flex-none">
+            <button class="uk-drop-close uk-btn uk-btn-primary uk-btn-icon">
+              <uk-icon icon="copy"></uk-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <button class="uk-btn uk-btn-secondary uk-btn-icon">
+        <span class="size-4"> <uk-icon icon="ellipsis"></uk-icon> </span>
+      </button>
+      <div class="uk-drop uk-dropdown" uk-drop="mode: click; pos: bottom-right">
+        <ul class="uk-dropdown-nav uk-nav">
+          <li><a class="uk-drop-close"> Content filter preferences </a></li>
+          <li class="uk-nav-divider"></li>
+          <li>
+            <a class="uk-drop-close text-destructive">Delete preset</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="flex h-[700px] gap-x-6 px-8 py-6">
+    <div class="flex-1">
+      <textarea
+        class="uk-textarea h-full resize-none p-4"
+        placeholder="Write a tagline for an ice cream shop"
+        readonly
+      ></textarea>
+    </div>
+    <div class="w-[200px] flex-none">
+      <span class="uk-form-label"> Mode </span>
+      <ul class="uk-tab-alt mt-2 h-auto">
+        <li class="uk-active">
+          <a>
+            <span class="size-4">
+              <uk-icon icon="letter-text"></uk-icon>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <span class="size-4">
+              <uk-icon icon="a-arrow-down"></uk-icon>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <span class="size-4">
+              <uk-icon icon="whole-word"></uk-icon>
+            </span>
+          </a>
+        </li>
+      </ul>
+      <div class="mt-4 space-y-2">
+        <span class="uk-form-label block">Model</span>
+        <div class="h-10">
+          <uk-select
+            class="fr-select"
+            icon="chevrons-up-down"
+            cls-custom="button: uk-input-fake justify-between; dropdown: w-full"
+            searchable="true"
+          >
+            <select hidden>
+              <optgroup label="GPT-3">
+                <option value="text-davinci-003" selected>
+                  text-davinci-003
+                </option>
+                <option value="text-curie-001">text-curie-001</option>
+                <option value="text-babbage-001">text-babbage-001</option>
+                <option value="text-ada-001">text-ada-001</option>
+              </optgroup>
+              <optgroup label="Codex">
+                <option value="code-davinci-002">code-davinci-002</option>
+                <option value="code-cushman-001">code-cushman-001</option>
+              </optgroup>
+            </select>
+          </uk-select>
+        </div>
+      </div>
+      <div class="mt-4 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="uk-form-label"> Temperature </span>
+          <span id="label_temperature" class="text-muted-foreground text-sm">
+            0.70
+          </span>
+        </div>
+        <uk-input-range
+          id="control_temperature"
+          value="0.7"
+          min="0"
+          max="1"
+          step="0.1"
+        ></uk-input-range>
+        <script>
+          const temperatureControl = document.getElementById(
+            "control_temperature",
+          );
+          const temperatureLabel = document.getElementById("label_temperature");
+
+          temperatureControl.addEventListener("uk-input-range:input", (e) => {
+            temperatureLabel.textContent = e.target.value;
+          });
+        </script>
+      </div>
+      <div class="mt-4 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="uk-form-label">Maximum Length</span>
+          <span id="label_max_length" class="text-muted-foreground text-sm">
+            512
+          </span>
+        </div>
+        <uk-input-range
+          id="control_max_length"
+          value="512"
+          min="0"
+          max="4000"
+          step="100"
+        ></uk-input-range>
+        <script>
+          const maxLengthControl =
+            document.getElementById("control_max_length");
+          const maxLengthLabel = document.getElementById("label_max_length");
+
+          maxLengthControl.addEventListener("uk-input-range:input", (e) => {
+            maxLengthLabel.textContent = e.target.value;
+          });
+        </script>
+      </div>
+      <div class="mt-4 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="uk-form-label">Top P</span>
+          <span id="label_top_p" class="text-muted-foreground text-sm">
+            0.90
+          </span>
+        </div>
+        <uk-input-range
+          id="control_top_p"
+          value="0.9"
+          min="0"
+          max="1"
+          step="0.1"
+        ></uk-input-range>
+        <script>
+          const topPControl = document.getElementById("control_top_p");
+          const topPLabel = document.getElementById("label_top_p");
+
+          topPControl.addEventListener("uk-input-range:input", (e) => {
+            topPLabel.textContent = e.target.value;
+          });
+        </script>
+      </div>
+    </div>
+  </div>
+  <div class="flex gap-x-2 px-8 py-6 pt-0">
+    <button class="uk-btn uk-btn-primary">Submit</button>
+    <button class="uk-btn uk-btn-secondary uk-btn-icon">
+      <span class="size-4"> <uk-icon icon="history"></uk-icon> </span>
+    </button>
+  </div>
+</body>

@@ -1,0 +1,10 @@
+{
+  "category": "authentication",
+  "id": "login-01",
+  "text": "login-01",
+  "title": "Login",
+  "description": "A simple login form with muted background.",
+  "frame": {
+    "height": 770
+  }
+}

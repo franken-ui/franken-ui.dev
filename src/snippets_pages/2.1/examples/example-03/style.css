@@ -1,0 +1,6 @@
+@layer base {
+  .fr-select li.uk-active > a {
+    --uk-nav-item-bg: hsl(var(--accent));
+    --uk-nav-item-color: hsl(var(--accent-foreground));
+  }
+}
