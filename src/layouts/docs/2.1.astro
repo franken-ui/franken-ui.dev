@@ -4,7 +4,7 @@ import Master from "layouts/master/latest.astro";
 import { titleCase } from "helpers/common";
 import { getCategorizedSnippets } from "data/snippets_pages";
 import Monster from "components/monster.astro";
-import Announcement from "components/announcement.astro";
+// import Announcement from "components/announcement.astro";
 import VersionSwitcher from "components/version-switcher.astro";
 
 type Heading = {
@@ -127,11 +127,11 @@ function isActive(href: string): boolean {
 
           <VersionSwitcher />
 
-          <Announcement
+          <!-- <Announcement
             href="https://franken.style"
             headline="Frankenstyle"
-            subtext="No-buid, value-driven, utility-first CSS framework"
-          />
+            subtext="The spiritual successor to Franken UI"
+          /> -->
         </div>
         <div class="flex items-center gap-2">
           <a

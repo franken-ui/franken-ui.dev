@@ -7,7 +7,33 @@ meta:
   robots: noindex
 tbc: false
 ---
-import Ec from 'snippets/ec.astro';
+
+import Ec from "snippets/ec.astro";
+
+## October 21, 2025
+
+### Version
+
+**v2.1.1**
+
+### License Notice
+
+This project uses [ApexCharts](https://apexcharts.com/), which now has a dual license (Community / Commercial / OEM).
+Please review the [ApexCharts License](https://apexcharts.com/license/) if you use it in a commercial context.
+
+### Dependency Updates
+
+| Package      | v2.1.1   | v2.1.0   |
+| ------------ | -------- | -------- |
+| `uikit`      | ^3.24.2  | ^3.23.11 |
+| `apexcharts` | ^5.3.5   | ^4.7.0   |
+| `lucide`     | ^0.546.0 | ^0.523.0 |
+
+### Notes
+
+* Upgraded **ApexCharts** dependency from `v4.7.0` → `v5.3.5`.
+* No breaking API changes are expected, but behavior may differ slightly for users who supply data in unusual formats (due to new data parsing features introduced in v5).
+* If you encounter any issues, please report them on our main GitHub repository.
 
 ## September 17, 2025
 
@@ -54,13 +80,13 @@ This version is a planned LTS release. Features are now locked, meaning no new f
 
 #### 1. Chart component externalized
 
-* **Impact**: *Low (NPM users only)*
+- **Impact**: _Low (NPM users only)_
 
 Due to our implementation of `@layer` directives, the chart has been removed from the core styling because we cannot control the CSS generation of Apex Charts. This change is intended to avoid hierarchy issues and ensure that the CSS for Apex Charts is at the highest level of hierarchy. Please refer to the [installation documentation](/docs/2.1/chart-introduction#option-2-using-npm) for instructions on how to apply changes.
 
 #### 2. Custom `<uk-select>` active color removed
 
-* **Impact**: *Medium (all users)*
+- **Impact**: _Medium (all users)_
 
 The default active color for custom `uk-select` has been deliberately removed. You now have full control over how selected items look.
 
@@ -72,14 +98,13 @@ This is just one way. You can customize it however you want: locally via class, 
 
 #### 3. Alpha-channels on dark mode
 
-* **Impact**: *Low (NPM users only)*
+- **Impact**: _Low (NPM users only)_
 
 The new color system now utilizes alpha channels instead of contrast-based colors. If you are using legacy colors, a custom palette, or a color generator, they will still function as expected. However, you will need to manually override three CSS variables for compatibility. Please refer to the [Custom Palette Documentation](/docs/2.1/theming#custom-palette) for instructions on how to apply these changes.
 
-
 ### Other noteworthy updates
 
-As part of the *"Can I copy your homework? Yeah, sure, just change it up a bit so we don't look the same!"* principle, here are some changes to help your site not look like a straight clone.
+As part of the _"Can I copy your homework? Yeah, sure, just change it up a bit so we don't look the same!"_ principle, here are some changes to help your site not look like a straight clone.
 
 What's new under the hood:
 
@@ -103,7 +128,7 @@ The `v2.0.0-internal.45` release has been promoted to `v2.0.0`. This release inc
 
 ---
 
-## February 15, 2025  
+## February 15, 2025
 
 - **Version**: v2.0.0-internal.45
 
@@ -111,19 +136,19 @@ The `v2.0.0-internal.45` release has been promoted to `v2.0.0`. This release inc
 
 #### 1. Root layout update for charting component
 
-- **Impact**: *Very Low*  
+- **Impact**: _Very Low_
 
 To support the new charting component, please update your root layout to accept the charting feature.
 
 **Changes**:
 
 - Add the following line to your root layout's script block:
-  
+
 <Ec path="release_notes.1" />
 
 #### 2. Theme switcher update for charting component
 
-- **Impact**: *Very Low*  
+- **Impact**: _Very Low_
 
 To support the new charting component, please update your `<uk-theme-switcher>` to accept the charting feature.
 
@@ -179,29 +204,29 @@ To reduce the maintenance burden and improve compatibility, certain components h
 
 The following table outlines the components that have been removed or replaced:
 
-| Component        | Status                                                   |
-| ---------------- | -------------------------------------------------------- |
-| Align            | Removed                                                  |
+| Component        | Status                                                       |
+| ---------------- | ------------------------------------------------------------ |
+| Align            | Removed                                                      |
 | Article          | Can be reimplemented with [Typography](/docs/2.1/typography) |
-| Background       | Removed                                                  |
-| Column           | Removed                                                  |
-| Countdown        | Removed                                                  |
-| Description List | Removed                                                  |
-| Flex             | Can be replaced by Tailwind CSS                          |
-| Grid             | Can be replaced by Tailwind CSS                          |
-| Height           | Can be replaced by Tailwind CSS                          |
-| Iconnav          | Can be reimplemented with `.flex` and `.uk-btn-icon`     |
-| Margin           | Can be replaced by Tailwind CSS                          |
-| Marker           | Removed                                                  |
+| Background       | Removed                                                      |
+| Column           | Removed                                                      |
+| Countdown        | Removed                                                      |
+| Description List | Removed                                                      |
+| Flex             | Can be replaced by Tailwind CSS                              |
+| Grid             | Can be replaced by Tailwind CSS                              |
+| Height           | Can be replaced by Tailwind CSS                              |
+| Iconnav          | Can be reimplemented with `.flex` and `.uk-btn-icon`         |
+| Margin           | Can be replaced by Tailwind CSS                              |
+| Marker           | Removed                                                      |
 | Navbar           | Can be reimplemented with `.flex` and [Drop](/docs/2.1/drop) |
-| Overlay          | Removed                                                  |
-| Padding          | Can be replaced by Tailwind CSS                          |
-| Search           | Removed                                                  |
-| Section          | Removed                                                  |
-| Tile             | Removed                                                  |
-| Upload           | Removed                                                  |
-| Visibility       | Can be replaced by Tailwind CSS                          |
-| Width            | Can be replaced by Tailwind CSS                          |
+| Overlay          | Removed                                                      |
+| Padding          | Can be replaced by Tailwind CSS                              |
+| Search           | Removed                                                      |
+| Section          | Removed                                                      |
+| Tile             | Removed                                                      |
+| Upload           | Removed                                                      |
+| Visibility       | Can be replaced by Tailwind CSS                              |
+| Width            | Can be replaced by Tailwind CSS                              |
 
 ### Others
 
