@@ -4,7 +4,7 @@ import Master from "layouts/master/latest.astro";
 import { titleCase } from "helpers/common";
 import { getCategorizedSnippets } from "data/snippets_pages";
 import Monster from "components/monster.astro";
-// import Announcement from "components/announcement.astro";
+import Announcement from "components/announcement.astro";
 import VersionSwitcher from "components/version-switcher.astro";
 
 type Heading = {
@@ -127,11 +127,11 @@ function isActive(href: string): boolean {
 
           <VersionSwitcher />
 
-          <!-- <Announcement
+          <Announcement
             href="https://franken.style"
             headline="Frankenstyle"
             subtext="The spiritual successor to Franken UI"
-          /> -->
+          />
         </div>
         <div class="flex items-center gap-2">
           <a
@@ -629,13 +629,13 @@ function isActive(href: string): boolean {
             s = o - m.y,
             a = Math.atan2(s, l),
             c = Math.min(0.1 * Math.sqrt(l * l + s * s), m.maxMove);
-          e.setAttribute("cx", m.x + Math.cos(a) * c),
-            e.setAttribute("cy", m.y + Math.sin(a) * c);
+          (e.setAttribute("cx", m.x + Math.cos(a) * c),
+            e.setAttribute("cy", m.y + Math.sin(a) * c));
         });
       }
       let d;
       function o(e) {
-        d && cancelAnimationFrame(d), (d = requestAnimationFrame(() => a(e)));
+        (d && cancelAnimationFrame(d), (d = requestAnimationFrame(() => a(e))));
       }
       document.addEventListener("mousemove", o);
     }
