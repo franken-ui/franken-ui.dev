@@ -18,19 +18,6 @@ The custom select component is a web component built from scratch to enhance the
 
 <Snippet component="select.basic" />
 
-## Styling
-
-The `<uk-select>` component is intentionally unstyled by default, allowing you to easily customize its appearance to fit your needs.
-
-To add custom styles, use the `cls-custom` attribute. This attribute accepts two formats:
-
-- A JSON-stringified object
-- A valid `key: value; foo: bar;` format
-
-If you pass only class names, they will be applied directly to the button inside the component.
-
-<Snippet component="select.styling" />
-
 ## Capturing values
 
 There are several ways to capture values from the `<uk-select>` component. The simplest approach is to add a `name` attribute to the component. When you do this, a hidden input field with the specified name will be automatically generated, allowing you to easily capture the selected value on your server.
@@ -156,6 +143,20 @@ When loading Web Components, a brief delay may cause a flash of unstyled content
 ## Internationalization
 
 <Snippet component="select.i18n" />
+
+## Styling
+
+The `<uk-select>` component is intentionally unstyled by default, allowing you to easily customize its appearance to fit your needs.
+
+To add custom styles, use the `cls-custom` attribute. This attribute accepts two formats:
+
+- A JSON-stringified object
+- A valid `key: value; foo: bar;` format
+
+If you pass only class names, they will be applied directly to the button inside the component.
+
+<Snippet component="select.styling" />
+
 
 ## Available options
 

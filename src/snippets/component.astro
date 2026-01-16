@@ -1,5 +1,5 @@
 ---
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
 import { resolve } from "path";
 
 const { version = "2.0", component } = Astro.props;
@@ -7,21 +7,31 @@ const { version = "2.0", component } = Astro.props;
 const id = `hx-${component.replace(".", "-")}`;
 const route = `/hx/ec/${version}/${component.replace(".", "/")}`;
 
+let preview = "";
 let lines = 0;
 
-const path = resolve(
+const basePath = resolve(
   "src",
   "snippets",
   version,
-  `${component.replace(".", "/")}/code.html`,
+  component.replace(".", "/"),
 );
 
-try {
-  const fileContent = readFileSync(path, "utf-8");
+const codePath = resolve(basePath, "code.html");
+const previewPath = resolve(basePath, "code.preview.html");
 
-  lines = fileContent.trim().split("\n").length || 1;
+try {
+  // Always read code.html for line count
+  const codeContent = readFileSync(codePath, "utf-8");
+  lines = codeContent.trim().split("\n").length || 1;
+
+  // Use code.preview.html if it exists, otherwise fall back to code.html content
+  preview = existsSync(previewPath)
+    ? readFileSync(previewPath, "utf-8")
+    : codeContent;
 } catch (error) {
-  console.error(`Error reading file from ${path}:`, error);
+  const componentPath = component.replace(".", "/");
+  console.error(`Error reading files for ${componentPath}:`, error);
 }
 ---
 
@@ -40,18 +50,7 @@ try {
   </ul>
   <ul class="uk-switcher mt-4">
     <li class="uk-active">
-      <div class="preview">
-        <div class="flex justify-center" id={id}>
-          <button
-            class="uk-btn uk-btn-default"
-            hx-get={`${route}/preview`}
-            hx-target={`#${id}`}
-            hx-swap="outerHTML"
-          >
-            Show
-          </button>
-        </div>
-      </div>
+      <div class="preview" set:html={preview} />
     </li>
     <li>
       <div class="ec">

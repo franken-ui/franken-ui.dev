@@ -18,19 +18,6 @@ The Input Date component is a web component built from scratch to allow users to
 
 <Snippet component="input_date.basic" />
 
-## Styling
-
-The `<uk-input-date>` component is intentionally unstyled by default, allowing you to easily customize its appearance to fit your needs.
-
-To add custom styles, use the `cls-custom` attribute. This attribute accepts two formats:
-
-- A JSON-stringified object
-- A valid `key: value; foo: bar;` format
-
-If you pass only class names, they will be applied directly to the button inside the component.
-
-<Snippet component="input_date.styling" />
-
 ## Capturing values
 
 There are several ways to capture values from the `<uk-input-date>` component. The simplest approach is to add a `name` attribute to the component. When you do this, a hidden input field with the specified name will be automatically generated, allowing you to easily capture the selected value on your server.
@@ -113,6 +100,19 @@ When loading Web Components, there may be a brief delay before the content is fu
 ## Internationalization
 
 Because this component uses [Calendar](/docs/2.1/calendar#internationalization) and [Input Time](/docs/2.1/input-time#internationalization) under the hood, you can use and merge their `i18n` attributes. Please refer to their documentation for available options.
+
+## Styling
+
+The `<uk-input-date>` component is intentionally unstyled by default, allowing you to easily customize its appearance to fit your needs.
+
+To add custom styles, use the `cls-custom` attribute. This attribute accepts two formats:
+
+- A JSON-stringified object
+- A valid `key: value; foo: bar;` format
+
+If you pass only class names, they will be applied directly to the button inside the component.
+
+<Snippet component="input_date.styling" />
 
 ## Attributes
 
